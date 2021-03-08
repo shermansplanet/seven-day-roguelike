@@ -26,6 +26,7 @@ public class CardInstance : MonoBehaviour
         transform.localScale = Vector3.one;
         this.card = card;
         cardName.text = card.GetName();
+        
     }
 
     private void OnMouseDown()

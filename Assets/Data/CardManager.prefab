@@ -43,6 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6e2f182685c44b883805df0cf7ade1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardFamilyColors:
+  - cardFamily: 0
+    color: {r: 0.5157529, g: 0.87204087, b: 0.8962264, a: 0}
+  - cardFamily: 1
+    color: {r: 0.4528302, g: 0.9056604, b: 0.5372523, a: 0}
+  - cardFamily: 2
+    color: {r: 0.9150943, g: 0.3539516, b: 0.3539516, a: 0}
   cards:
   - id: 0
+    name: Example
+    cardFamily: 1
+  - id: 1
+    name: Why?
+    cardFamily: 0
+  - id: 2
     name: Test
+    cardFamily: 2
