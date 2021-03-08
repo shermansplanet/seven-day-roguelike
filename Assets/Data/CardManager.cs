@@ -10,6 +10,7 @@ public class CardManager : MonoBehaviour
         EXAMPLE,
         WHY,
         TEST,
+        COUNT // number of different cards
     }
 
     public enum CardFamily 
@@ -21,7 +22,7 @@ public class CardManager : MonoBehaviour
 
     [Serializable]
     public struct CardFamilyColor {
-        public CardFamily cardFamily;
+        public CardFamily family;
         public Color color;
     }
 
@@ -30,7 +31,7 @@ public class CardManager : MonoBehaviour
     {
         public CardId id;
         public string name;
-        public CardFamily cardFamily;
+        public CardFamily family;
     }
 
     public CardFamilyColor[] cardFamilyColors;
@@ -45,7 +46,7 @@ public class CardManager : MonoBehaviour
         }
         cardFamilyToColor = new Dictionary<CardFamily, Color>();
         foreach (CardFamilyColor family in cardFamilyColors) {
-            cardFamilyToColor[family.cardFamily] = family.color;
+            cardFamilyToColor[family.family] = family.color;
         }
     }
 
@@ -55,5 +56,9 @@ public class CardManager : MonoBehaviour
 
     public static Color GetColorByFamily(CardFamily family) {
         return cardFamilyToColor[family];
+    }
+
+    public static CardId GetRandomCardId() {
+        return (CardId)UnityEngine.Random.Range(0, (int)CardId.COUNT);
     }
 }

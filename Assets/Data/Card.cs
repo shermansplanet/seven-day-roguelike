@@ -26,4 +26,8 @@ public class Card
     public string GetName() {
         return this.cardData.name;
     }
+
+    public Color GetColor() {
+        return CardManager.GetColorByFamily(this.cardData.family);
+    }
 }
