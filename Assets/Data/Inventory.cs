@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
         inventory = new Card[INVENTORY_SIZE];
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             Card newCard = new Card();
-            newCard.Init(EXAMPLE);
+            newCard.Init(CardManager.CardId.EXAMPLE);
         }
     }
 
