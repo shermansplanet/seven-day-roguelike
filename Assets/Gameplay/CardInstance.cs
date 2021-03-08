@@ -98,5 +98,7 @@ public class CardInstance : MonoBehaviour
             return;
         }
         transform.localPosition = originalCardPosition;
+        x = Mathf.RoundToInt(originalCardPosition.x);
+        y = Mathf.RoundToInt(originalCardPosition.y);
     }
 }
