@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8302122334429515481}
   - component: {fileID: 8812618264631530666}
   m_Layer: 0
-  m_Name: CardList
+  m_Name: CardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards:
   - id: 0
-    name: Example
+    name: Test

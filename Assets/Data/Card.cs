@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class Card
 {
     CardManager.CardData cardData;
+    bool onCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +21,9 @@ public class Card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string GetName() {
+        return this.cardData.name;
     }
 }

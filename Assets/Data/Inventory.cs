@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine; 
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     const int INVENTORY_SIZE = 12;
     public Card[] inventory;
