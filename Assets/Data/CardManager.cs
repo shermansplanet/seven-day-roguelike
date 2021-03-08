@@ -18,7 +18,7 @@ public class CardManager : MonoBehaviour
     }
 
     public CardData[] cards;
-    static Dictionary<CardId, CardData> cardIdToData;
+    static Dictionary<CardId, CardData> cardIdToData = new Dictionary<CardId, CardData>();
 
     private void Awake() {
         cardIdToData = new Dictionary<CardId, CardData>();
