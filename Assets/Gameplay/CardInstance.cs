@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardInstance : MonoBehaviour
 {
+    public TextMeshPro cardName;
+
     private ConversationGrid grid;
+    private Card card;
 
     // How many pixels tall a grid square is
     private float gridSquarePixels;
@@ -14,12 +18,14 @@ public class CardInstance : MonoBehaviour
     [HideInInspector]
     public int x, y;
 
-    public void Init(ConversationGrid grid)
+    public void Init(ConversationGrid grid, Card card)
     {
         this.grid = grid;
         gridSquarePixels = Screen.height / grid.GridSquaresVertical;
         transform.SetParent(grid.transform);
         transform.localScale = Vector3.one;
+        this.card = card;
+        cardName.text = card.GetName();
     }
 
     private void OnMouseDown()
