@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: {fileID: 2350257787144475406}
+  renderer: {fileID: 7309411929931839808}
   x: 0
   y: 0
 --- !u!61 &4614763670745019515

@@ -22,15 +22,21 @@ public class ConversationGrid : MonoBehaviour
 
     }
 
-    public void SpawnCard(Card c)
+    public void SpawnCard(Card c, CardInstance parent)
     {
         CardInstance cardInstance = Instantiate(cardPrefab);
+        parent.draggedCard = cardInstance;
         cards.Add(cardInstance);
         cardInstance.Init(this, c, false);
     }
 
     public void OnCardRelease(CardInstance card)
     {
+        if(GetCard(card.x, card.y) != null)
+        {
+            card.CancelMove();
+            return;
+        }
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
     }
 
@@ -44,7 +50,7 @@ public class ConversationGrid : MonoBehaviour
     {
         foreach(CardInstance card in cards)
         {
-            if(card.x == x && card.y == y)
+            if(card.x == x && card.y == y && card.beingDragged == false)
             {
                 return card;
             }
