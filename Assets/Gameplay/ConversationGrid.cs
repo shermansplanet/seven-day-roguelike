@@ -20,11 +20,13 @@ public class ConversationGrid : MonoBehaviour
         gridScale = Camera.main.orthographicSize * 2 / GridSquaresVertical;
         transform.localScale = Vector3.one * gridScale;
 
+    }
+
+    public void SpawnCard(Card c)
+    {
         CardInstance cardInstance = Instantiate(cardPrefab);
         cards.Add(cardInstance);
-        Card card = new Card();
-        card.Init(CardManager.CardId.EXAMPLE);
-        cardInstance.Init(this, card);
+        cardInstance.Init(this, c, false);
     }
 
     public void OnCardRelease(CardInstance card)

@@ -13,6 +13,7 @@ public class Inventory
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             Card newCard = new Card();
             newCard.Init(CardManager.CardId.EXAMPLE);
+            inventory[i] = newCard;
         }
     }
 
