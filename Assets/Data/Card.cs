@@ -28,6 +28,15 @@ public class Card
     }
 
     public Color GetColor() {
+        if (onCooldown) return CardManager.GetColorByFamily(CardManager.CardFamily.COOLDOWN);
         return CardManager.GetColorByFamily(this.cardData.family);
+    }
+
+    public void OnCooldown() {
+        onCooldown = true;
+    }
+
+    public void OffCooldown() {
+        onCooldown = false;
     }
 }

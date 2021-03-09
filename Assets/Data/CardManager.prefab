@@ -50,6 +50,8 @@ MonoBehaviour:
     color: {r: 0.4528302, g: 0.9056604, b: 0.5372523, a: 1}
   - family: 2
     color: {r: 0.9150943, g: 0.3539516, b: 0.3539516, a: 1}
+  - family: 3
+    color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   cards:
   - id: 0
     name: Example

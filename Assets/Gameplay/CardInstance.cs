@@ -49,6 +49,8 @@ public class CardInstance : MonoBehaviour
         if (isInInventory)
         {
             grid.SpawnCard(card, this);
+            card.OnCooldown();
+            cardRenderer.color = card.GetColor();
             return;
         }
         beingDragged = true;

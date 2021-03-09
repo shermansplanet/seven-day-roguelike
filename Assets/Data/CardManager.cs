@@ -18,6 +18,7 @@ public class CardManager : MonoBehaviour
         QUESTION,
         ELABORATE,
         DIRECT,
+        COOLDOWN,
     }
 
     [Serializable]
