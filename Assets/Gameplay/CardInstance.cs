@@ -11,7 +11,8 @@ public class CardInstance : MonoBehaviour
     private ConversationGrid grid;
     private Card card;
     private bool isInInventory;
-    private bool firstDrag;
+    public bool firstDrag;
+    private CardInstance parent;
 
     // How many pixels tall a grid square is
     private float gridSquarePixels;
@@ -27,8 +28,10 @@ public class CardInstance : MonoBehaviour
     [HideInInspector]
     public CardInstance draggedCard;
 
-    public void Init(ConversationGrid grid, Card card, bool inInventory)
+    public void Init(ConversationGrid grid, Card card, bool inInventory, CardInstance parent = null)
     {
+        if (inInventory && parent) Debug.LogError("card in inventory should not have parent!");
+        this.parent = parent;
         this.grid = grid;
         draggable = true;
         if (!inInventory)
@@ -110,15 +113,22 @@ public class CardInstance : MonoBehaviour
         firstDrag = false;
     }
 
-    public void CancelMove()
+    public void CancelMoveSnapBack()
     {
-        if (firstDrag)
-        {
-            Destroy(gameObject);
-            return;
-        }
         transform.localPosition = originalCardPosition;
         x = Mathf.RoundToInt(originalCardPosition.x);
         y = Mathf.RoundToInt(originalCardPosition.y);
+    }
+
+    public void CancelMoveFromInventory() 
+    {
+        if (parent) parent.ChildMoveCancelled();
+        Destroy(gameObject);
+    }
+
+    public void ChildMoveCancelled() 
+    {
+        card.OffCooldown();
+        cardRenderer.color = card.GetColor();
     }
 }
