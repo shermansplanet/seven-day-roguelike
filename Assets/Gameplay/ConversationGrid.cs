@@ -30,10 +30,10 @@ public class ConversationGrid : MonoBehaviour
         CardInstance cardInstance = Instantiate(cardPrefab);
         parent.draggedCard = cardInstance;
         cards.Add(cardInstance);
-        cardInstance.Init(this, c, false);
+        cardInstance.Init(this, c, false, parent);
         if(activeCard != null)
         {
-            Destroy(activeCard.gameObject);
+            activeCard.CancelMoveFromInventory();
         }
         activeCard = cardInstance;
         confirmButton.interactable = true;
@@ -41,9 +41,10 @@ public class ConversationGrid : MonoBehaviour
 
     public void OnCardRelease(CardInstance card)
     {
-        if(GetCard(card.x, card.y) != null)
+        if (GetCard(card.x, card.y) != null)
         {
-            card.CancelMove();
+            if (card.firstDrag) card.CancelMoveFromInventory();
+            else card.CancelMoveSnapBack();
             return;
         }
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
