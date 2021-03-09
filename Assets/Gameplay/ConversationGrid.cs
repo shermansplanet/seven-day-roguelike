@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConversationGrid : MonoBehaviour
 {
@@ -9,17 +10,19 @@ public class ConversationGrid : MonoBehaviour
     public CardInstance cardPrefab;
     public SpriteRenderer sprite;
     public Transform highlight;
+    public Button confirmButton;
 
     [HideInInspector]
     public float gridScale;
 
     private List<CardInstance> cards = new List<CardInstance>();
+    private CardInstance activeCard;
 
     void Start()
     {
         gridScale = Camera.main.orthographicSize * 2 / GridSquaresVertical;
         transform.localScale = Vector3.one * gridScale;
-
+        confirmButton.interactable = false;
     }
 
     public void SpawnCard(Card c, CardInstance parent)
@@ -28,6 +31,12 @@ public class ConversationGrid : MonoBehaviour
         parent.draggedCard = cardInstance;
         cards.Add(cardInstance);
         cardInstance.Init(this, c, false);
+        if(activeCard != null)
+        {
+            Destroy(activeCard.gameObject);
+        }
+        activeCard = cardInstance;
+        confirmButton.interactable = true;
     }
 
     public void OnCardRelease(CardInstance card)
@@ -38,6 +47,13 @@ public class ConversationGrid : MonoBehaviour
             return;
         }
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
+    }
+
+    public void ConfirmMove()
+    {
+        activeCard.draggable = false;
+        activeCard = null;
+        confirmButton.interactable = false;
     }
 
     public void OnCardDrag(CardInstance card)

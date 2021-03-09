@@ -12,8 +12,6 @@ public class CardInstance : MonoBehaviour
     private Card card;
     private bool isInInventory;
     private bool firstDrag;
-    public bool beingDragged;
-    public CardInstance draggedCard;
 
     // How many pixels tall a grid square is
     private float gridSquarePixels;
@@ -23,9 +21,16 @@ public class CardInstance : MonoBehaviour
     [HideInInspector]
     public int x, y;
 
+    [HideInInspector]
+    public bool beingDragged, draggable;
+
+    [HideInInspector]
+    public CardInstance draggedCard;
+
     public void Init(ConversationGrid grid, Card card, bool inInventory)
     {
         this.grid = grid;
+        draggable = true;
         if (!inInventory)
         {
             gridSquarePixels = Screen.height / grid.GridSquaresVertical;
@@ -46,6 +51,10 @@ public class CardInstance : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!draggable)
+        {
+            return;
+        }
         if (isInInventory)
         {
             grid.SpawnCard(card, this);
@@ -58,6 +67,10 @@ public class CardInstance : MonoBehaviour
 
     public void OnMouseDrag()
     {
+        if (!draggable)
+        {
+            return;
+        }
         if (isInInventory)
         {
             if(draggedCard != null)
@@ -77,6 +90,10 @@ public class CardInstance : MonoBehaviour
 
     public void OnMouseUp()
     {
+        if (!draggable)
+        {
+            return;
+        }
         if (isInInventory)
         {
             if (draggedCard != null)
