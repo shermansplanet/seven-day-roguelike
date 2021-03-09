@@ -56,7 +56,7 @@ public class ConversationGrid : MonoBehaviour
 
     public void ConfirmMove()
     {
-        activeCard.draggable = false;
+        activeCard.Confirm();
         activeCard = null;
         confirmButton.interactable = false;
         rotateButton.gameObject.SetActive(false);
