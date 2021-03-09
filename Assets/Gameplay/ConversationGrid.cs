@@ -10,7 +10,7 @@ public class ConversationGrid : MonoBehaviour
     public CardInstance cardPrefab;
     public SpriteRenderer sprite;
     public Transform highlight;
-    public Button confirmButton;
+    public Button confirmButton, rotateButton;
 
     [HideInInspector]
     public float gridScale;
@@ -47,6 +47,10 @@ public class ConversationGrid : MonoBehaviour
             return;
         }
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
+        rotateButton.gameObject.SetActive(true);
+        rotateButton.transform.position = 
+            Camera.main.WorldToScreenPoint(card.transform.position) +
+            new Vector3(80,80,0);
     }
 
     public void ConfirmMove()
@@ -54,11 +58,18 @@ public class ConversationGrid : MonoBehaviour
         activeCard.draggable = false;
         activeCard = null;
         confirmButton.interactable = false;
+        rotateButton.gameObject.SetActive(false);
+    }
+
+    public void Rotate()
+    {
+        activeCard.transform.Rotate(0, 0, -90);
     }
 
     public void OnCardDrag(CardInstance card)
     {
         highlight.localPosition = new Vector3(card.x, card.y, 0);
+        rotateButton.gameObject.SetActive(false);
     }
 
     // Not optimal but like how many cards are gonna be on the field at once
