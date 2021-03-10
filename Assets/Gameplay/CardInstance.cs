@@ -11,7 +11,7 @@ public class CardInstance : MonoBehaviour
     public SpriteRenderer[] edges;
 
     private ConversationGrid grid;
-    private Card card;
+    public Card card;
     private bool isInInventory;
     public bool firstDrag;
     private CardInstance parent;
@@ -23,7 +23,7 @@ public class CardInstance : MonoBehaviour
     private Vector3 gridPixelPosition;
 
     [HideInInspector]
-    public int x, y;
+    public int x, y, rotation;
 
     [HideInInspector]
     public bool beingDragged;

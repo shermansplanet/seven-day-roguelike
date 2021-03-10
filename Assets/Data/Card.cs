@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card
 {
-    CardManager.CardData cardData;
+    public CardManager.CardData cardData;
     public bool IsOnCooldown { get; private set; } = false;
     //displayed same as cooldown card
     public bool ChildBeingDragged { get; private set; } = false;

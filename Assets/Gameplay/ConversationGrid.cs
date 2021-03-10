@@ -144,4 +144,22 @@ public class ConversationGrid : MonoBehaviour
 
         return null;
     }
+
+    public int GetCardScore()
+    {
+        int score = activeCard.card.GetScore();
+        for(int i=0; i<4; i++)
+        {
+            CardManager.CardEdge edge = activeCard.card.cardData.edges[i];
+            if (edge == CardManager.CardEdge.NONE) continue;
+            Vector2 direction = directions[i];
+            int x = Mathf.RoundToInt(direction.x + activeCard.x);
+            int y = Mathf.RoundToInt(direction.y + activeCard.y);
+            if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) continue;
+            CardInstance otherCard = GetCard(x, y);
+            if (otherCard == null) continue;
+
+        }
+        return score;
+    }
 }
