@@ -24,7 +24,8 @@ public class CardInstance : MonoBehaviour
     public int x, y;
 
     [HideInInspector]
-    public bool beingDragged, draggable;
+    public bool beingDragged;
+    bool confirmedOnBoard = false;
 
     [HideInInspector]
     public CardInstance draggedCard;
@@ -34,8 +35,8 @@ public class CardInstance : MonoBehaviour
         if (inInventory && parent) Debug.LogError("card in inventory should not have parent!");
         this.parent = parent;
         this.grid = grid;
-        draggable = true;
         gridPixelPosition = Camera.main.WorldToScreenPoint(grid.transform.position);
+        this.card = card;
         if (!inInventory)
         {
             gridSquarePixels = Screen.height / grid.GridSquaresVertical;
@@ -49,21 +50,23 @@ public class CardInstance : MonoBehaviour
             OnMouseDown();
         }
         isInInventory = inInventory;
-        this.card = card;
         cardName.text = card.GetName();
         cardRenderer.color = card.GetColor();
     }
 
+    public bool Draggable() 
+    {
+        return !confirmedOnBoard && !card.IsOnCooldown;
+    }
+
     private void OnMouseDown()
     {
-        if (!draggable)
-        {
-            return;
-        }
+        if (!Draggable()) return;
         if (isInInventory)
         {
+            if (card.ChildBeingDragged) return;
             grid.SpawnCard(card, this);
-            card.OnCooldown();
+            card.Select();
             cardRenderer.color = card.GetColor();
             return;
         }
@@ -74,10 +77,7 @@ public class CardInstance : MonoBehaviour
 
     public void OnMouseDrag()
     {
-        if (!draggable)
-        {
-            return;
-        }
+        if (!Draggable()) return;
         if (isInInventory)
         {
             if(draggedCard != null)
@@ -97,10 +97,7 @@ public class CardInstance : MonoBehaviour
 
     public void OnMouseUp()
     {
-        if (!draggable)
-        {
-            return;
-        }
+        if (!Draggable()) return;
         if (isInInventory)
         {
             if (draggedCard != null)
@@ -113,6 +110,11 @@ public class CardInstance : MonoBehaviour
         grid.OnCardRelease(this);
         beingDragged = false;
         firstDrag = false;
+    }
+
+    public void Confirm() {
+        confirmedOnBoard = true;
+        card.Confirm();
     }
 
     public void CancelMoveSnapBack()

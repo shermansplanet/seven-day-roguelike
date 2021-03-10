@@ -5,7 +5,9 @@ using UnityEngine;
 public class Card
 {
     CardManager.CardData cardData;
-    bool onCooldown;
+    public bool IsOnCooldown { get; private set; } = false;
+    //displayed same as cooldown card
+    public bool ChildBeingDragged { get; private set; } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +30,21 @@ public class Card
     }
 
     public Color GetColor() {
-        if (onCooldown) return CardManager.GetColorByFamily(CardManager.CardFamily.COOLDOWN);
+        if (IsOnCooldown || ChildBeingDragged) return CardManager.GetColorByFamily(CardManager.CardFamily.COOLDOWN);
         return CardManager.GetColorByFamily(this.cardData.family);
     }
 
-    public void OnCooldown() {
-        onCooldown = true;
+    public void Select() {
+        ChildBeingDragged = true;
+    }
+
+    public void Confirm() {
+        ChildBeingDragged = false;
+        IsOnCooldown = true;
     }
 
     public void OffCooldown() {
-        onCooldown = false;
+        ChildBeingDragged = false;
+        IsOnCooldown = false;
     }
 }
