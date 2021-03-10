@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -60,6 +61,11 @@ public class CardInstance : MonoBehaviour
         }
     }
 
+    public void SetCenterText(string text)
+    {
+        baseScore.text = text;
+    }
+
     public bool Draggable() 
     {
         return !confirmedOnBoard && !card.IsOnCooldown;
@@ -76,6 +82,7 @@ public class CardInstance : MonoBehaviour
             cardRenderer.color = card.GetColor();
             return;
         }
+        ResetCenterText();
         beingDragged = true;
         originalMousePosition = Input.mousePosition;
         originalCardPosition = transform.localPosition;
@@ -99,6 +106,11 @@ public class CardInstance : MonoBehaviour
             (Input.mousePosition - originalMousePosition) / gridSquarePixels;
 
         grid.OnCardDrag(this);
+    }
+
+    public void ResetCenterText()
+    {
+        baseScore.text = card.GetScore().ToString();
     }
 
     public void OnMouseUp()
