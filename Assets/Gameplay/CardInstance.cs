@@ -43,7 +43,7 @@ public class CardInstance : MonoBehaviour
         {
             gridSquarePixels = Screen.height / grid.GridSquaresVertical;
             transform.SetParent(grid.transform);
-            transform.localScale = Vector3.one * 0.95f;
+            transform.localScale = Vector3.one * 0.97f;
             transform.localPosition = new Vector3(
                 (Input.mousePosition.x - gridPixelPosition.x) / gridSquarePixels,
                 (Input.mousePosition.y - gridPixelPosition.y) / gridSquarePixels, 0
