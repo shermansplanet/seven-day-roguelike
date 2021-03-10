@@ -22,6 +22,7 @@ public class CardManager : MonoBehaviour
         DIRECT,
         ENERGY,
         COOLDOWN,
+        COUNT
     }
 
     public enum CardEdge 
@@ -57,16 +58,13 @@ public class CardManager : MonoBehaviour
 
     public CardFamilyColor[] cardFamilyColors;
     public CardEdgeSprite[] cardEdgeSprites;
-    public CardData[] cards;
     static Dictionary<CardId, CardData> cardIdToData;
     static Dictionary<CardFamily, Color> cardFamilyToColor;
     static Dictionary<CardEdge, Sprite> cardEdgeToSprite;
 
     private void Awake() {
-        cardIdToData = new Dictionary<CardId, CardData>();
-        foreach (CardData card in cards) {
-            cardIdToData[card.id] = card;
-        }
+        cardIdToData = CardParser.GetCardData();
+
         cardFamilyToColor = new Dictionary<CardFamily, Color>();
         foreach (CardFamilyColor family in cardFamilyColors) {
             cardFamilyToColor[family.family] = family.color;
