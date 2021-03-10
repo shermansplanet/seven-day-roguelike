@@ -38,19 +38,19 @@ public static class CardParser
             string[] parts = line.Split(',');
             CardManager.CardData data = new CardManager.CardData
             {
-                id = cardIds[parts[0]],
-                name = parts[1],
-                family = cardFamilies[parts[2]],
-                baseScore = int.Parse(parts[3]),
+                id = cardIds[parts[0].Trim()],
+                name = parts[1].Trim(),
+                family = cardFamilies[parts[2].Trim()],
+                baseScore = int.Parse(parts[3].Trim()),
                 edges = new CardManager.CardEdge[]
                 {
-                    cardEdges[parts[4]],
-                    cardEdges[parts[5]],
-                    cardEdges[parts[6]],
-                    cardEdges[parts[7]]
+                    cardEdges[parts[4].Trim()],
+                    cardEdges[parts[5].Trim()],
+                    cardEdges[parts[6].Trim()],
+                    cardEdges[parts[7].Trim()]
                 }
             };
-            cardDict.Add(cardIds[parts[0]], data);
+            cardDict.Add(cardIds[parts[0].Trim()], data);
         }
         return cardDict;
     }

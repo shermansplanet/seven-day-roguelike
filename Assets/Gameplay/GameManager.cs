@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     {
         Inventory inventory = new Inventory();
         inventory.PopulateInventory();
-        inventoryUI.SpawnFromInventory(inventory);
+        inventoryUI.Init(inventory);
     }
 
 }

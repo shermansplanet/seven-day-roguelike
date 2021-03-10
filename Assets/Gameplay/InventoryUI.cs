@@ -1,24 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
     public CardInstance cardInstancePrefab;
+    public TextMeshPro cooldownCount;
+    public TextMeshPro deckCount;
+
+    [HideInInspector]
     public ConversationGrid grid;
+    public Inventory inventory;
 
     private List<CardInstance> inventoryCards = new List<CardInstance>();
 
-    public void SpawnFromInventory(Inventory inventoryObj)
+    public void Init(Inventory inventory)
     {
-        Card[] inventory = inventoryObj.inventory;
-        for(int i=0; i<inventory.Length; i++)
-        {
-            CardInstance card = Instantiate(cardInstancePrefab);
-            card.transform.SetParent(transform);
-            card.transform.localPosition = new Vector3((i - (inventory.Length-1) / 2f) * 1.1f, 0, 0);
-            card.Init(grid, inventory[i], true);
-            inventoryCards.Add(card);
+        this.inventory = inventory;
+        DrawHand();
+    }
+
+    public void DrawHand() {
+        Card[] hand = inventory.GetHand();
+        for (int i = 0; i < hand.Length; i++) {
+            CardInstance cardInstance = Instantiate(cardInstancePrefab);
+            cardInstance.transform.SetParent(transform);
+            cardInstance.transform.localPosition = new Vector3((i - (hand.Length - 1) / 2f) * 1.1f, 0, 0);
+            cardInstance.Init(grid, hand[i], true);
+            inventoryCards.Add(cardInstance);
         }
+        cooldownCount.text = inventory.GetCooldownCount().ToString();
+        deckCount.text = inventory.GetDeckCount().ToString();
     }
 }
