@@ -18,6 +18,7 @@ public class CardInstance : MonoBehaviour
     private float gridSquarePixels;
     private Vector3 originalMousePosition;
     private Vector3 originalCardPosition;
+    private Vector3 gridPixelPosition;
 
     [HideInInspector]
     public int x, y;
@@ -34,14 +35,15 @@ public class CardInstance : MonoBehaviour
         this.parent = parent;
         this.grid = grid;
         draggable = true;
+        gridPixelPosition = Camera.main.WorldToScreenPoint(grid.transform.position);
         if (!inInventory)
         {
             gridSquarePixels = Screen.height / grid.GridSquaresVertical;
             transform.SetParent(grid.transform);
-            transform.localScale = Vector3.one;
+            transform.localScale = Vector3.one * 0.95f;
             transform.localPosition = new Vector3(
-                (Input.mousePosition.x - Screen.width / 2) / gridSquarePixels,
-                (Input.mousePosition.y - Screen.height / 2) / gridSquarePixels, 0
+                (Input.mousePosition.x - gridPixelPosition.x) / gridSquarePixels,
+                (Input.mousePosition.y - gridPixelPosition.y) / gridSquarePixels, 0
             );
             firstDrag = true;
             OnMouseDown();
@@ -84,8 +86,8 @@ public class CardInstance : MonoBehaviour
             }
             return;
         }
-        x = Mathf.RoundToInt((Input.mousePosition.x - Screen.width / 2) / gridSquarePixels);
-        y = Mathf.RoundToInt((Input.mousePosition.y - Screen.height / 2) / gridSquarePixels);
+        x = Mathf.RoundToInt((Input.mousePosition.x - gridPixelPosition.x) / gridSquarePixels);
+        y = Mathf.RoundToInt((Input.mousePosition.y - gridPixelPosition.y) / gridSquarePixels);
 
         transform.localPosition = originalCardPosition +
             (Input.mousePosition - originalMousePosition) / gridSquarePixels;
