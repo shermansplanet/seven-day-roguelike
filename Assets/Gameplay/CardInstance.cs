@@ -6,7 +6,9 @@ using UnityEngine;
 public class CardInstance : MonoBehaviour
 {
     public TextMeshPro cardName;
+    public TextMeshPro baseScore;
     public SpriteRenderer cardRenderer;
+    public SpriteRenderer[] edges;
 
     private ConversationGrid grid;
     private Card card;
@@ -49,7 +51,11 @@ public class CardInstance : MonoBehaviour
         }
         isInInventory = inInventory;
         cardName.text = card.GetName();
+        baseScore.text = card.GetScore().ToString();
         cardRenderer.color = card.GetColor();
+        for (int i = 0; i < 4; i++) {
+            edges[i].sprite = card.GetEdgeSprite(i);
+        }
     }
 
     public bool Draggable() 
