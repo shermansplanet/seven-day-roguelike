@@ -171,7 +171,6 @@ public class ConversationGrid : MonoBehaviour
         for(int i=0; i<4; i++)
         {
             CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
-            if (edge == CardManager.CardEdge.NONE) continue;
             Vector2 direction = directions[i];
             int x = Mathf.RoundToInt(direction.x + activeCard.x);
             int y = Mathf.RoundToInt(direction.y + activeCard.y);
