@@ -326,6 +326,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6489496066393936776, guid: 3c674932f85c447788cfb6bf7c1c24bc,
         type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1848773347}
+    - target: {fileID: 6489496066393936776, guid: 3c674932f85c447788cfb6bf7c1c24bc,
+        type: 3}
       propertyPath: inventoryUI
       value: 
       objectReference: {fileID: 99935574}
@@ -473,8 +478,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1848773347}
-        m_MethodName: ConfirmMove
+      - m_Target: {fileID: 2051585989}
+        m_MethodName: OnConfirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1064,6 +1069,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925468152}
   m_CullTransparentMesh: 0
+--- !u!114 &2051585989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6489496066393936776, guid: 3c674932f85c447788cfb6bf7c1c24bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 398258970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16223ddb093a488181cb785f2ae287d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &803816714502590328
 PrefabInstance:
   m_ObjectHideFlags: 0

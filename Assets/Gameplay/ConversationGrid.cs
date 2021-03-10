@@ -185,7 +185,7 @@ public class ConversationGrid : MonoBehaviour
             }
             if(edge != otherEdge)
             {
-                score += (edge == CardManager.CardEdge.QUESTION && otherEdge == CardManager.CardEdge.INFO) ? 2 : -2;
+                score += (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) ? 2 : -2;
             }
         }
         return score;
