@@ -11,6 +11,7 @@ public class ConversationGrid : MonoBehaviour
     public CardInstance cardPrefab;
     public Transform highlight;
     public Button confirmButton, rotateButton;
+    public Text scoreText;
     public int BoardHeight = 4;
     public int BoardWidth = 6;
     public Transform gridSquarePrefab;
@@ -23,6 +24,7 @@ public class ConversationGrid : MonoBehaviour
     private CardInstance activeCard;
     private List<Vector2> availableSpots = new List<Vector2>();
     private List<GameObject> spawnedOutlines = new List<GameObject>();
+    private int totalScore;
 
     private readonly Vector2[] directions = new[]
     {
@@ -73,11 +75,22 @@ public class ConversationGrid : MonoBehaviour
             else card.CancelMoveSnapBack();
             return;
         }
+        UpdateCardBonus(card);
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
         rotateButton.gameObject.SetActive(true);
         rotateButton.transform.position = 
             Camera.main.WorldToScreenPoint(card.transform.position) +
             new Vector3(80,80,0);
+    }
+
+    private void UpdateCardBonus(CardInstance card)
+    {
+        int baseScore = card.card.GetScore();
+        int extra = GetCardScore() - baseScore;
+        card.SetCenterText(
+            baseScore.ToString() +
+            (extra < 0 ? "" : "+") +
+            extra.ToString());
     }
 
     private bool CanPlaceCard(int x, int y)
@@ -89,7 +102,12 @@ public class ConversationGrid : MonoBehaviour
     {
         cards.Add(activeCard);
         activeCard.Confirm();
+        totalScore += GetCardScore();
+        scoreText.text = "Score: " + totalScore.ToString();
+        activeCard.ResetCenterText();
+
         activeCard = null;
+
         confirmButton.interactable = false;
         rotateButton.gameObject.SetActive(false);
 
@@ -122,6 +140,8 @@ public class ConversationGrid : MonoBehaviour
     public void Rotate()
     {
         activeCard.transform.Rotate(0, 0, -90);
+        activeCard.rotation = (activeCard.rotation + 1) % 4;
+        UpdateCardBonus(activeCard);
     }
 
     public void OnCardDrag(CardInstance card)
@@ -150,15 +170,24 @@ public class ConversationGrid : MonoBehaviour
         int score = activeCard.card.GetScore();
         for(int i=0; i<4; i++)
         {
-            CardManager.CardEdge edge = activeCard.card.cardData.edges[i];
+            CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
             if (edge == CardManager.CardEdge.NONE) continue;
             Vector2 direction = directions[i];
             int x = Mathf.RoundToInt(direction.x + activeCard.x);
             int y = Mathf.RoundToInt(direction.y + activeCard.y);
-            if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) continue;
-            CardInstance otherCard = GetCard(x, y);
-            if (otherCard == null) continue;
-
+            CardManager.CardEdge otherEdge = CardManager.CardEdge.NONE;
+            if (!(x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight)){
+                CardInstance otherCard = GetCard(x, y);
+                if (otherCard == null) continue;
+                otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
+            }
+            if(edge == otherEdge && edge != CardManager.CardEdge.NONE){
+                score += edge == CardManager.CardEdge.QUESTION ? -2 : 2;
+            }
+            if(edge != otherEdge)
+            {
+                score += (edge == CardManager.CardEdge.QUESTION && otherEdge == CardManager.CardEdge.INFO) ? 2 : -2;
+            }
         }
         return score;
     }
