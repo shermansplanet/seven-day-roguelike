@@ -51,14 +51,43 @@ MonoBehaviour:
   - family: 2
     color: {r: 0.9150943, g: 0.3539516, b: 0.3539516, a: 1}
   - family: 3
+    color: {r: 0.9245283, g: 0.88084203, b: 0.47970808, a: 1}
+  - family: 4
     color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+  cardEdgeSprites:
+  - edge: 1
+    sprite: {fileID: 21300000, guid: 5efcb1f3e3585594b80c17ea0e656e60, type: 3}
+  - edge: 2
+    sprite: {fileID: 21300000, guid: fd3833111cebd9f4287639c26b2d68c3, type: 3}
+  - edge: 3
+    sprite: {fileID: 21300000, guid: a4651d13e97183f4d97d06ac96c91da8, type: 3}
+  - edge: 4
+    sprite: {fileID: 21300000, guid: 462bd7940e1703547b6d4413e57584e8, type: 3}
+  - edge: 0
+    sprite: {fileID: 0}
   cards:
   - id: 0
     name: Example
     family: 1
+    baseScore: 3
+    edges: 020000000200000002000000
   - id: 1
     name: Why?
     family: 0
+    baseScore: 4
+    edges: 0100000002000000
   - id: 2
     name: Test
     family: 2
+    baseScore: 5
+    edges: 
+  - id: 3
+    name: So exciting!
+    family: 3
+    baseScore: 6
+    edges: 030000000000000002000000
+  - id: 4
+    name: So sleepy...
+    family: 3
+    baseScore: 7
+    edges: 04000000

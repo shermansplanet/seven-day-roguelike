@@ -9,29 +9,27 @@ public class Card
     //displayed same as cooldown card
     public bool ChildBeingDragged { get; private set; } = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void Init(CardManager.CardId cardId) {
         cardData = CardManager.GetDataById(cardId);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public string GetName() {
+        return cardData.name;
     }
 
-    public string GetName() {
-        return this.cardData.name;
+    public int GetScore() {
+        return cardData.baseScore;
     }
 
     public Color GetColor() {
         if (IsOnCooldown || ChildBeingDragged) return CardManager.GetColorByFamily(CardManager.CardFamily.COOLDOWN);
-        return CardManager.GetColorByFamily(this.cardData.family);
+        return CardManager.GetColorByFamily(cardData.family);
+    }
+
+    public Sprite GetEdgeSprite(int index) {
+        if (index >= cardData.edges.Length) return null;
+        CardManager.CardEdge edge = cardData.edges[index];
+        return CardManager.GetSpriteByEdge(edge);
     }
 
     public void Select() {
