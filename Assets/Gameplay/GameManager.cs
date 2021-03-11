@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public void OnConfirm()
     {
         grid.ConfirmMove();
+        inventoryUI.DrawHand();
     }
 
 }

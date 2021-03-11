@@ -456,8 +456,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -822,6 +822,12 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1848773347}
+    - target: {fileID: 7613469881128520848, guid: 13d2451b987bd455e9fc75ce524ca3e6,
+        type: 3}
+      propertyPath: cardInventoryPrefab
+      value: 
+      objectReference: {fileID: 6229948029259416666, guid: 3a4f836d614df1e46bafc336325cd8d6,
+        type: 3}
     - target: {fileID: 8975923706051838544, guid: 13d2451b987bd455e9fc75ce524ca3e6,
         type: 3}
       propertyPath: m_Name
@@ -1023,10 +1029,10 @@ RectTransform:
   m_Father: {fileID: 101850069}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 783.51, y: 359.63}
-  m_SizeDelta: {x: -1591.6115, y: -962.42145}
+  m_AnchoredPosition: {x: -162.23999, y: -176.8}
+  m_SizeDelta: {x: 299.88855, y: 110.42389}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925468154
 MonoBehaviour:
@@ -1108,6 +1114,12 @@ PrefabInstance:
       propertyPath: confirmButton
       value: 
       objectReference: {fileID: 497659118}
+    - target: {fileID: 803816715350079554, guid: cd5efa040d8994ca09dce9cf8d724a8f,
+        type: 3}
+      propertyPath: cardGridPrefab
+      value: 
+      objectReference: {fileID: 2119149927613310384, guid: 12ef3ea3dfe7a4043be5a7637a3b2f46,
+        type: 3}
     - target: {fileID: 803816715350079556, guid: cd5efa040d8994ca09dce9cf8d724a8f,
         type: 3}
       propertyPath: m_RootOrder

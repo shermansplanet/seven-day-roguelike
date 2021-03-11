@@ -22,6 +22,10 @@ public class Inventory
         playableDeck = new List<Card>(inventory);
     }
 
+    public void UpdatePlayableDeck() {
+        playableDeck = playableDeck.FindAll(card => !card.IsOnCooldown);
+    }
+
     public Card[] GetHand() {
         if (playableDeck.Count < 4) return playableDeck.ToArray();
         return playableDeck.GetRange(0, 4).ToArray();

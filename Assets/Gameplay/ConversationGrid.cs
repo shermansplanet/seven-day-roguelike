@@ -8,7 +8,7 @@ public class ConversationGrid : MonoBehaviour
 {
     // How many grid squares fit into the screen vertically
     public float GridSquaresVertical = 10f;
-    public CardInstance cardPrefab;
+    public CardGrid cardGridPrefab;
     public Transform highlight;
     public Button confirmButton, rotateButton;
     public Text scoreText;
@@ -20,8 +20,8 @@ public class ConversationGrid : MonoBehaviour
     [HideInInspector]
     public float gridScale;
 
-    private List<CardInstance> cards = new List<CardInstance>();
-    private CardInstance activeCard;
+    private List<CardGrid> cards = new List<CardGrid>();
+    public CardGrid activeCard;
     private List<Vector2> availableSpots = new List<Vector2>();
     private List<GameObject> spawnedOutlines = new List<GameObject>();
     private int totalScore;
@@ -54,20 +54,20 @@ public class ConversationGrid : MonoBehaviour
         }
     }
 
-    public void SpawnCard(Card c, CardInstance parent)
+    public void SpawnCard(Card c, CardInventory parent)
     {
-        CardInstance cardInstance = Instantiate(cardPrefab);
-        parent.draggedCard = cardInstance;
-        cardInstance.Init(this, c, false, parent);
+        CardGrid cardGrid = Instantiate(cardGridPrefab);
+        parent.draggedCard = cardGrid;
+        cardGrid.Init(this, c, parent);
         if(activeCard != null)
         {
             activeCard.CancelMoveFromInventory();
         }
-        activeCard = cardInstance;
+        activeCard = cardGrid;
         confirmButton.interactable = true;
     }
 
-    public void OnCardRelease(CardInstance card)
+    public void OnCardRelease(CardGrid card)
     {
         if (!CanPlaceCard(card.x,card.y))
         {
@@ -83,7 +83,7 @@ public class ConversationGrid : MonoBehaviour
             new Vector3(80,80,0);
     }
 
-    private void UpdateCardBonus(CardInstance card)
+    private void UpdateCardBonus(CardGrid card)
     {
         int baseScore = card.card.GetScore();
         int extra = GetCardScore() - baseScore;
@@ -113,7 +113,7 @@ public class ConversationGrid : MonoBehaviour
 
         // Recalculate available spots
         availableSpots.Clear();
-        foreach (CardInstance card in cards)
+        foreach (CardGrid card in cards)
         {
             foreach(Vector2 direction in directions)
             {
@@ -144,7 +144,7 @@ public class ConversationGrid : MonoBehaviour
         UpdateCardBonus(activeCard);
     }
 
-    public void OnCardDrag(CardInstance card)
+    public void OnCardDrag(CardGrid card)
     {
         highlight.localPosition = new Vector3(card.x, card.y, 0);
         highlight.gameObject.SetActive(CanPlaceCard(card.x, card.y));
@@ -152,9 +152,9 @@ public class ConversationGrid : MonoBehaviour
     }
 
     // Not optimal but like how many cards are gonna be on the field at once
-    public CardInstance GetCard(int x, int y)
+    public CardGrid GetCard(int x, int y)
     {
-        foreach(CardInstance card in cards)
+        foreach(CardGrid card in cards)
         {
             if(card.x == x && card.y == y)
             {
@@ -176,7 +176,7 @@ public class ConversationGrid : MonoBehaviour
             int y = Mathf.RoundToInt(direction.y + activeCard.y);
             CardManager.CardEdge otherEdge = CardManager.CardEdge.NONE;
             if (!(x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight)){
-                CardInstance otherCard = GetCard(x, y);
+                CardGrid otherCard = GetCard(x, y);
                 if (otherCard == null) continue;
                 otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
             }

@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f53db5c4c8c94539a1da7c7dcc957d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardInstancePrefab: {fileID: 6010214398007744305, guid: ab19956e4ddea459fb50fc8899925db9,
+  cardInventoryPrefab: {fileID: 6229948029259416666, guid: 3a4f836d614df1e46bafc336325cd8d6,
     type: 3}
   cooldownCount: {fileID: 8715322496572381793}
   deckCount: {fileID: 6261769025238171344}

@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridSquaresVertical: 6
-  cardPrefab: {fileID: 6010214398007744305, guid: ab19956e4ddea459fb50fc8899925db9,
+  cardPrefab: {fileID: 2119149927613310384, guid: 12ef3ea3dfe7a4043be5a7637a3b2f46,
     type: 3}
   highlight: {fileID: 4123904671460103669}
   confirmButton: {fileID: 0}
   rotateButton: {fileID: 0}
+  scoreText: {fileID: 0}
   BoardHeight: 4
   BoardWidth: 6
   gridSquarePrefab: {fileID: 4526216012818506466, guid: 05fa59d98974a45be92d3e1760deb651,
@@ -57,6 +58,7 @@ MonoBehaviour:
   outlinePrefab: {fileID: 2648904440212953074, guid: ec81e85321c2c464ca51f4a641618eda,
     type: 3}
   gridScale: 0
+  activeCard: {fileID: 0}
 --- !u!1 &6959963674747404665
 GameObject:
   m_ObjectHideFlags: 0
