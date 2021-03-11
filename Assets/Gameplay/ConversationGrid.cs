@@ -20,9 +20,15 @@ public class ConversationGrid : MonoBehaviour
     [HideInInspector]
     public float gridScale;
 
-    private List<CardGrid> cards = new List<CardGrid>();
+    [HideInInspector]
+    public List<CardGrid> cards = new List<CardGrid>();
+
+    [HideInInspector]
     public CardGrid activeCard;
-    private List<Vector2> availableSpots = new List<Vector2>();
+
+    [HideInInspector]
+    public List<Vector2> availableSpots = new List<Vector2>();
+
     private List<GameObject> spawnedOutlines = new List<GameObject>();
     private int totalScore;
 
@@ -57,7 +63,7 @@ public class ConversationGrid : MonoBehaviour
     public void SpawnCard(Card c, CardInventory parent)
     {
         CardGrid cardGrid = Instantiate(cardGridPrefab);
-        parent.draggedCard = cardGrid;
+        if(parent) parent.draggedCard = cardGrid;
         cardGrid.Init(this, c, parent);
         if(activeCard != null)
         {
