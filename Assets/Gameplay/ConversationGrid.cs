@@ -30,7 +30,6 @@ public class ConversationGrid : MonoBehaviour
     public List<Vector2> availableSpots = new List<Vector2>();
 
     private List<GameObject> spawnedOutlines = new List<GameObject>();
-    private int totalScore;
 
     private readonly Vector2[] directions = new[]
     {
@@ -108,8 +107,8 @@ public class ConversationGrid : MonoBehaviour
     {
         cards.Add(activeCard);
         activeCard.Confirm();
-        totalScore += GetCardScore();
-        scoreText.text = "Score: " + totalScore.ToString();
+        GameManager.score += GetCardScore();
+        scoreText.text = "Score: " + GameManager.score.ToString();
         activeCard.ResetCenterText();
 
         activeCard = null;

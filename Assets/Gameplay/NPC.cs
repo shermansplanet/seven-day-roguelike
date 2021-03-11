@@ -24,6 +24,5 @@ public class NPC
         grid.activeCard.x = Mathf.RoundToInt(spot.x);
         grid.activeCard.y = Mathf.RoundToInt(spot.y);
         grid.OnCardRelease(grid.activeCard);
-        grid.ConfirmMove();
     }
 }
