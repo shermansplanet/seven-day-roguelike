@@ -103,10 +103,11 @@ public class ConversationGrid : MonoBehaviour
     {
         if (!CanPlaceCard(card.x,card.y))
         {
-            if (card.firstDrag) card.CancelMoveFromInventory();
-            else card.CancelMoveSnapBack();
-            UpdateCardBonus(card);
-            return;
+            if (card.firstDrag) {
+                card.CancelMoveFromInventory();
+                return;
+            }
+            card.CancelMoveSnapBack();
         }
         UpdateCardBonus(card);
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
