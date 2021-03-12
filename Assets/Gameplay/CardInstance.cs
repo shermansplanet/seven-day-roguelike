@@ -13,12 +13,14 @@ public class CardInstance : MonoBehaviour
     public SpriteRenderer cardRenderer;
     public SpriteRenderer[] edges;
 
-    public void Init(Card card)
+    public void Init(Card card, bool forceColor = false)
     {
         this.card = card;
         cardName.text = card.GetName();
         baseScore.text = card.GetScore().ToString();
-        cardRenderer.color = card.GetColor();
+
+        cardRenderer.color = forceColor ? card.GetRawColor() : card.GetColor();
+
         for (int i = 0; i < 4; i++) {
             edges[i].sprite = card.GetEdgeSprite(i);
             edges[i].color = Color.black;
