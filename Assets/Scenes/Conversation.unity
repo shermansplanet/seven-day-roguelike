@@ -1106,6 +1106,16 @@ PrefabInstance:
       objectReference: {fileID: 1925468154}
     - target: {fileID: 803816715350079554, guid: cd5efa040d8994ca09dce9cf8d724a8f,
         type: 3}
+      propertyPath: BoardWidth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 803816715350079554, guid: cd5efa040d8994ca09dce9cf8d724a8f,
+        type: 3}
+      propertyPath: BoardHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 803816715350079554, guid: cd5efa040d8994ca09dce9cf8d724a8f,
+        type: 3}
       propertyPath: rotateButton
       value: 
       objectReference: {fileID: 762314748}

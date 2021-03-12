@@ -41,7 +41,12 @@ public class GameManager : MonoBehaviour
     public void OnCardPlaced()
     {
         grid.ConfirmMove();
-        if(score >= ScoreToWin)
+        bool fullBoard = grid.availableSpots.Count == 0;
+        if (fullBoard)
+        {
+            grid.cards.Clear();
+        }
+        if (score >= ScoreToWin || fullBoard)
         {
             currentNPC.gameState = grid.GetGameState();
             SceneManager.LoadScene(0);
