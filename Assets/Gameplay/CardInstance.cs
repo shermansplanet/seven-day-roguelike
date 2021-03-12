@@ -23,6 +23,7 @@ public class CardInstance : MonoBehaviour
 
         for (int i = 0; i < 4; i++) {
             edges[i].sprite = card.GetEdgeSprite(i);
+            edges[i].color = Color.black;
         }
     }
 
@@ -30,10 +31,19 @@ public class CardInstance : MonoBehaviour
     {
         baseScore.text = text;
     }
-    
-    public void ResetCenterText()
-    {
+
+    public void ResetCenterText() {
         baseScore.text = card.GetScore().ToString();
+    }
+
+    public void SetEdgeColor(int index, Color color) {
+        edges[index].color = color;
+    }
+    
+    public void ResetEdgeColor() {
+        for (int i = 0; i < 4; i++) {
+            edges[i].color = Color.black;
+        }
     }
 
     public void UpdateColor() 

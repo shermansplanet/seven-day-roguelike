@@ -45,6 +45,10 @@ public class CardGrid : MonoBehaviour {
         cardInstance.SetCenterText(text);
     }
 
+    public void SetEdgeColor(int index, Color color) {
+        cardInstance.SetEdgeColor(index, color);
+    }
+
     public bool Draggable() {
         return !confirmedOnBoard;
     }

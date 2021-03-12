@@ -205,24 +205,47 @@ public class ConversationGrid : MonoBehaviour
     public int GetCardScore()
     {
         int score = activeCard.card.GetScore();
-        for(int i=0; i<4; i++)
+        for(int i = 0; i < 4; i++)
         {
             CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
             Vector2 direction = directions[i];
             int x = Mathf.RoundToInt(direction.x + activeCard.x);
             int y = Mathf.RoundToInt(direction.y + activeCard.y);
             CardManager.CardEdge otherEdge = CardManager.CardEdge.NONE;
+            CardGrid otherCard = null;
             if (!(x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight)){
-                CardGrid otherCard = GetCard(x, y);
+                otherCard = GetCard(x, y);
                 if (otherCard == null) continue;
                 otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
             }
             if(edge == otherEdge && edge != CardManager.CardEdge.NONE){
-                score += edge == CardManager.CardEdge.QUESTION ? -2 : 2;
+                if (edge == CardManager.CardEdge.QUESTION) {
+                    score += -2;
+                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.red);
+                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.red);
+                }
+                else {
+                    score += 2;
+                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.green);
+                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.green);
+                }
             }
             if(edge != otherEdge)
             {
-                score += (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) ? 2 : -2;
+                if (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) {
+                    score += 2;
+                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.green);
+                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.green);
+                }
+                else if (
+                    edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.NONE
+                    || edge == CardManager.CardEdge.NONE && otherEdge == CardManager.CardEdge.INFO
+                    ) continue;
+                else {
+                    score += -2;
+                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.red);
+                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.red);
+                }
             }
         }
         return score;
