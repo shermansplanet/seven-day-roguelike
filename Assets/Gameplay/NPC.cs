@@ -6,11 +6,16 @@ using UnityEngine;
 public class NPC
 {
     public Inventory inventory;
+    public ConversationGrid.GameState gameState;
 
     public NPC()
     {
         inventory = new Inventory();
         inventory.PopulateInventory();
+        gameState = new ConversationGrid.GameState
+        {
+            cards = new List<CardGrid>()
+        };
     }
 
     public void TakeTurn(ConversationGrid grid)

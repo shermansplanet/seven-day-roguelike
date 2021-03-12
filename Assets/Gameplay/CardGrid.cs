@@ -25,7 +25,7 @@ public class CardGrid : MonoBehaviour {
     bool confirmedOnBoard = false;
 
     public void Init(ConversationGrid grid, Card card, CardInventory parent) {
-        cardInstance.Init(card);
+        cardInstance.Init(card, parent == null);
         this.parent = parent;
         this.grid = grid;
         gridPixelPosition = Camera.main.WorldToScreenPoint(grid.transform.position);

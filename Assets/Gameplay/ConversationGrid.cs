@@ -37,6 +37,33 @@ public class ConversationGrid : MonoBehaviour
 
     };
 
+    public struct GameState
+    {
+        public List<CardGrid> cards;
+    }
+
+    public GameState GetGameState()
+    {
+        return new GameState
+        {
+            cards = cards
+        };
+    }
+
+    public void SetGameState(GameState state)
+    {
+        foreach(CardGrid card in state.cards)
+        {
+            CardGrid newInstance = Instantiate(cardGridPrefab);
+            newInstance.Init(this, card.card, null);
+            newInstance.x = card.x;
+            newInstance.y = card.y;
+            newInstance.transform.localPosition = new Vector3(card.x, card.y, 0);
+            cards.Add(newInstance);
+        }
+        if (cards.Count > 0) UpdateAvailableSpots();
+    }
+
     void Start()
     {
         gridScale = Camera.main.orthographicSize * 2 / GridSquaresVertical;
@@ -54,7 +81,7 @@ public class ConversationGrid : MonoBehaviour
                 gridSquare.SetParent(transform);
                 gridSquare.localScale = Vector3.one;
                 gridSquare.localPosition = new Vector3(x, y, 0);
-                availableSpots.Add(new Vector2(x, y));
+                if(cards.Count == 0) availableSpots.Add(new Vector2(x, y));
             }
         }
     }
@@ -116,11 +143,16 @@ public class ConversationGrid : MonoBehaviour
         confirmButton.interactable = false;
         rotateButton.gameObject.SetActive(false);
 
+        UpdateAvailableSpots();
+    }
+
+    private void UpdateAvailableSpots()
+    {
         // Recalculate available spots
         availableSpots.Clear();
         foreach (CardGrid card in cards)
         {
-            foreach(Vector2 direction in directions)
+            foreach (Vector2 direction in directions)
             {
                 int x = Mathf.RoundToInt(direction.x + card.x);
                 int y = Mathf.RoundToInt(direction.y + card.y);
@@ -132,7 +164,7 @@ public class ConversationGrid : MonoBehaviour
             }
         }
         foreach (GameObject outline in spawnedOutlines) Destroy(outline);
-        foreach(Vector2 spot in availableSpots)
+        foreach (Vector2 spot in availableSpots)
         {
             GameObject outline = Instantiate(outlinePrefab);
             outline.transform.SetParent(transform);
@@ -190,9 +222,7 @@ public class ConversationGrid : MonoBehaviour
             }
             if(edge != otherEdge)
             {
-                score +=
-                    (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) ? 2 :
-                    (edge == CardManager.CardEdge.INFO || otherEdge == CardManager.CardEdge.INFO) ? 0 : - 2;
+                score += (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) ? 2 : -2;
             }
         }
         return score;

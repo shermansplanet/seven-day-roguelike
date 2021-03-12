@@ -21,9 +21,14 @@ public class Card
         return cardData.baseScore;
     }
 
+    public Color GetRawColor()
+    {
+        return CardManager.GetColorByFamily(cardData.family);
+    }
+
     public Color GetColor() {
         if (IsOnCooldown || ChildBeingDragged) return CardManager.GetColorByFamily(CardManager.CardFamily.COOLDOWN);
-        return CardManager.GetColorByFamily(cardData.family);
+        return GetRawColor();
     }
 
     public Sprite GetEdgeSprite(int index) {

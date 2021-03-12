@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     public static bool playerTurn = true;
     public static int score;
 
-    private NPC npc;
+    private NPC currentNPC;
 
+    private static NPC[] npcList;
     private static Inventory inventory;
 
     // Start is called before the first frame update
@@ -23,9 +24,12 @@ public class GameManager : MonoBehaviour
         {
             inventory = new Inventory();
             inventory.PopulateInventory();
+            npcList = new NPC[3];
+            for (int i = 0; i < npcList.Length; i++) npcList[i] = new NPC();
         }
         inventoryUI.Init(inventory);
-        npc = new NPC();
+        currentNPC = npcList[Random.Range(0,npcList.Length)];
+        grid.SetGameState(currentNPC.gameState);
         score = 0;
     }
 
@@ -39,6 +43,7 @@ public class GameManager : MonoBehaviour
         grid.ConfirmMove();
         if(score >= ScoreToWin)
         {
+            currentNPC.gameState = grid.GetGameState();
             SceneManager.LoadScene(0);
             StopAllCoroutines();
         }
@@ -49,7 +54,7 @@ public class GameManager : MonoBehaviour
         OnCardPlaced();
         playerTurn = false;
         yield return new WaitForSeconds(1);
-        npc.TakeTurn(grid);
+        currentNPC.TakeTurn(grid);
         OnCardPlaced();
         playerTurn = true;
         inventoryUI.DrawHand();
