@@ -58,7 +58,9 @@ public class ConversationGrid : MonoBehaviour
             newInstance.Init(this, card.card, null);
             newInstance.x = card.x;
             newInstance.y = card.y;
+            newInstance.rotation = card.rotation;
             newInstance.transform.localPosition = new Vector3(card.x, card.y, 0);
+            newInstance.transform.Rotate(0, 0, -90 * card.rotation);
             cards.Add(newInstance);
         }
         if (cards.Count > 0) UpdateAvailableSpots();
@@ -103,10 +105,11 @@ public class ConversationGrid : MonoBehaviour
     {
         if (!CanPlaceCard(card.x,card.y))
         {
-            if (card.firstDrag) card.CancelMoveFromInventory();
-            else card.CancelMoveSnapBack();
-            UpdateCardBonus(card);
-            return;
+            if (card.firstDrag) {
+                card.CancelMoveFromInventory();
+                return;
+            }
+            card.CancelMoveSnapBack();
         }
         UpdateCardBonus(card);
         card.transform.localPosition = new Vector3(card.x, card.y, 0);
@@ -232,10 +235,10 @@ public class ConversationGrid : MonoBehaviour
         }
     }
 
-    public int GetCardScore()
+    public int GetCardScore(bool updateColors = true)
     {
         int score = activeCard.card.GetScore();
-        ResetEdgeAndNeighborsColor();
+        if(updateColors) ResetEdgeAndNeighborsColor();
         for(int i = 0; i < 4; i++)
         {
             CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
@@ -245,25 +248,25 @@ public class ConversationGrid : MonoBehaviour
             if(edge == otherEdge && edge != CardManager.CardEdge.NONE){
                 if (edge == CardManager.CardEdge.QUESTION) {
                     score += -2;
-                    SetEdgeColorPenalty(i);
+                    if (updateColors) SetEdgeColorPenalty(i);
                 }
                 else {
                     score += 2;
-                    SetEdgeColorBonus(i);
+                    if (updateColors) SetEdgeColorBonus(i);
                 }
             }
             if(edge != otherEdge)
             {
                 if (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) {
                     score += 2;
-                    SetEdgeColorBonus(i);
+                    if (updateColors) SetEdgeColorBonus(i);
                 }
                 else if (
                     !(edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.NONE)
                     && !(edge == CardManager.CardEdge.NONE && otherEdge == CardManager.CardEdge.INFO)
                     ) {
                     score += -2;
-                    SetEdgeColorPenalty(i);
+                    if (updateColors) SetEdgeColorPenalty(i);
                 }
             }
         }
