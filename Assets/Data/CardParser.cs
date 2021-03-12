@@ -36,6 +36,7 @@ public static class CardParser
         foreach (string line in txt.Split('\n'))
         {
             string[] parts = line.Split(',');
+            Debug.Log(line);
             CardManager.CardData data = new CardManager.CardData
             {
                 id = cardIds[parts[0].Trim()],

@@ -7,10 +7,19 @@ public class CardManager : MonoBehaviour
 {
     public enum CardId
     {
+        FUNFACT,
         EXAMPLE,
+        ANECDOTE,
         WHY,
+        HOW,
+        FOLLOWUP,
+        SAME,
         TEST,
-        ENTHUSIASM,
+        NO,
+        SHUSH,
+        WOW,
+        COOL,
+        SILENCE,
         SLEEPY,
         COUNT // number of different cards
     }

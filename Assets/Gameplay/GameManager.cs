@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private const int ScoreToWin = 10;
+    private const int ScoreToWin = 20;
 
     public InventoryUI inventoryUI;
     public ConversationGrid grid;
