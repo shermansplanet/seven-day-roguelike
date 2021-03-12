@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         OnCardPlaced();
         playerTurn = false;
         yield return new WaitForSeconds(1);
-        currentNPC.TakeTurn(grid);
+        yield return currentNPC.TakeTurn(grid);
         OnCardPlaced();
         playerTurn = true;
         inventoryUI.DrawHand();
