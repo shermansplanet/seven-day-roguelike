@@ -78,6 +78,7 @@ public class ConversationGrid : MonoBehaviour
         {
             if (card.firstDrag) card.CancelMoveFromInventory();
             else card.CancelMoveSnapBack();
+            UpdateCardBonus(card);
             return;
         }
         UpdateCardBonus(card);
@@ -151,6 +152,7 @@ public class ConversationGrid : MonoBehaviour
 
     public void OnCardDrag(CardGrid card)
     {
+        ResetEdgeAndNeighborsColor();
         highlight.localPosition = new Vector3(card.x, card.y, 0);
         highlight.gameObject.SetActive(CanPlaceCard(card.x, card.y));
         rotateButton.gameObject.SetActive(false);
@@ -170,49 +172,66 @@ public class ConversationGrid : MonoBehaviour
         return null;
     }
 
+    public CardGrid GetAdjacentCard(int edgeIndex) {
+        Vector2 direction = directions[edgeIndex];
+        int x = Mathf.RoundToInt(direction.x + activeCard.x);
+        int y = Mathf.RoundToInt(direction.y + activeCard.y);
+        if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) return null;
+            return GetCard(x, y);
+        }
+
+    private void SetEdgeColorBonus(int edgeIndex) {
+        CardGrid otherCard = GetAdjacentCard(edgeIndex);
+        activeCard.SetEdgeColor((edgeIndex + 4 - activeCard.rotation) % 4, Color.green);
+        otherCard?.SetEdgeColor((edgeIndex + 6 - otherCard.rotation) % 4, Color.green);
+    }
+
+    private void SetEdgeColorPenalty(int edgeIndex) {
+        CardGrid otherCard = GetAdjacentCard(edgeIndex);
+        activeCard.SetEdgeColor((edgeIndex + 4 - activeCard.rotation) % 4, Color.red);
+        otherCard?.SetEdgeColor((edgeIndex + 6 - otherCard.rotation) % 4, Color.red);
+    }
+
+    private void ResetEdgeAndNeighborsColor() {
+        for (int i = 0; i < 4; i++) {
+            CardGrid otherCard = GetAdjacentCard(i);
+            activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.black);
+            otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.black);
+        }
+    }
+
     public int GetCardScore()
     {
         int score = activeCard.card.GetScore();
+        ResetEdgeAndNeighborsColor();
         for(int i = 0; i < 4; i++)
         {
             CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
-            Vector2 direction = directions[i];
-            int x = Mathf.RoundToInt(direction.x + activeCard.x);
-            int y = Mathf.RoundToInt(direction.y + activeCard.y);
-            CardManager.CardEdge otherEdge = CardManager.CardEdge.NONE;
-            CardGrid otherCard = null;
-            if (!(x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight)){
-                otherCard = GetCard(x, y);
-                if (otherCard == null) continue;
-                otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
-            }
+            CardGrid otherCard = GetAdjacentCard(i);
+            if (otherCard == null) continue;
+            CardManager.CardEdge otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
             if(edge == otherEdge && edge != CardManager.CardEdge.NONE){
                 if (edge == CardManager.CardEdge.QUESTION) {
                     score += -2;
-                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.red);
-                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.red);
+                    SetEdgeColorPenalty(i);
                 }
                 else {
                     score += 2;
-                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.green);
-                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.green);
+                    SetEdgeColorBonus(i);
                 }
             }
             if(edge != otherEdge)
             {
                 if (edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.QUESTION) {
                     score += 2;
-                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.green);
-                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.green);
+                    SetEdgeColorBonus(i);
                 }
                 else if (
-                    edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.NONE
-                    || edge == CardManager.CardEdge.NONE && otherEdge == CardManager.CardEdge.INFO
-                    ) continue;
-                else {
+                    !(edge == CardManager.CardEdge.INFO && otherEdge == CardManager.CardEdge.NONE)
+                    && !(edge == CardManager.CardEdge.NONE && otherEdge == CardManager.CardEdge.INFO)
+                    ) {
                     score += -2;
-                    activeCard.SetEdgeColor((i + 4 - activeCard.rotation) % 4, Color.red);
-                    otherCard?.SetEdgeColor((i + 6 - otherCard.rotation) % 4, Color.red);
+                    SetEdgeColorPenalty(i);
                 }
             }
         }
