@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public ConversationGrid grid;
     public static bool playerTurn = true;
     public static int score;
+    public SpriteRenderer character;
 
     private NPC currentNPC;
 
@@ -23,13 +25,17 @@ public class GameManager : MonoBehaviour
         if (inventory == null)
         {
             inventory = new Inventory();
-            inventory.PopulateInventory();
+            inventory.PopulateRandomInventory();
             npcList = new NPC[3];
-            for (int i = 0; i < npcList.Length; i++) npcList[i] = new NPC();
+            //for (int i = 0; i < npcList.Length; i++) npcList[i] = new NPC(CharacterManager.Name.STRAWBUB);
+            npcList[0] = new NPC(CharacterManager.Name.STRAWBUB);
+            npcList[1] = new NPC(CharacterManager.Name.LAVENDER);
+            npcList[2] = new NPC(CharacterManager.Name.NONE);
         }
         inventoryUI.Init(inventory);
         currentNPC = npcList[Random.Range(0,npcList.Length)];
         grid.SetGameState(currentNPC.gameState);
+        character.sprite = CharacterManager.GetSprite(currentNPC.characterName);
         score = 0;
     }
 
