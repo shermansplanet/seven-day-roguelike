@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1693554159902290360}
+  - component: {fileID: 1419890275}
   - component: {fileID: 2182370494600313114}
+  - component: {fileID: 1584626816519678853}
   m_Layer: 0
   m_Name: OverworldManager
   m_TagString: Untagged
@@ -31,6 +33,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1419890275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794086159923187789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428376eb883734e3aa0f3560cf12d6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lavenderColors:
+  - {r: 0.7941704, g: 0.55108577, b: 0.9056604, a: 1}
+  - {r: 0.8679245, g: 0.8255736, b: 0.65913135, a: 1}
+  - {r: 0.30019575, g: 0.5471698, b: 0.26067996, a: 1}
+  strawbubColors:
+  - {r: 0.8679245, g: 0.27419823, b: 0.21698113, a: 1}
+  - {r: 0.7924528, g: 0.6212397, b: 0.43734425, a: 1}
+  - {r: 0.44026563, g: 0.6603774, b: 0.40183342, a: 1}
+  noneColors:
+  - {r: 0.4433962, g: 0.26157284, b: 0.17359379, a: 1}
+  - {r: 0.6525157, g: 0.4481132, b: 1, a: 1}
+  - {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
 --- !u!114 &2182370494600313114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,5 +67,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa8a80322e3b46a58a4e5f236c93c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcPrefab: {fileID: 6394444576298366027, guid: d931ac86fec124351b735b8baa29d802,
+    type: 3}
+  colors: {fileID: 1419890275}
+  levelGen: {fileID: 1584626816519678853}
+  player: {fileID: 0}
+--- !u!114 &1584626816519678853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794086159923187789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df747b5c3ff614d74960b6dc2b25c52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
