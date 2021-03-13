@@ -8,7 +8,7 @@ public class OverworldManager : MonoBehaviour
 {
     public LevelGenerator levelGen;
 
-    public void Start()
+    public void Awake()
     {
         levelGen.GenerateLevel();
     }

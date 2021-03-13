@@ -6,7 +6,7 @@ public class LevelGenerator : MonoBehaviour
 {
     private const int PathSeparation= 3;
     private const int EncounterLength = 5;
-    private const int GridSize = 3;
+    private const float GridSize = 2.5f;
 
     public SpriteRenderer tilePrefab;
     public SpriteRenderer blockerPrefab;
@@ -119,5 +119,7 @@ public class LevelGenerator : MonoBehaviour
                 blocker.transform.localScale = Vector3.one * GridSize;
             }
         }
+
+        player.transform.position = new Vector2(0, pathPosition * PathSeparation * GridSize);
     }
 }
