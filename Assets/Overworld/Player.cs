@@ -35,6 +35,5 @@ public class Player : MonoBehaviour
             if (playerCollider.radius < nrm.magnitude) continue;
             transform.Translate(nrm.normalized * (playerCollider.radius - nrm.magnitude));
         }
-
     }
 }

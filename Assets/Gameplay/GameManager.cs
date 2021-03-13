@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static bool playerTurn = true;
     public static int score;
     public SpriteRenderer character;
+    public static int npcIndex;
 
     private NPC currentNPC;
 
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
             npcList[2] = new NPC(CharacterManager.Name.NONE);
         }
         inventoryUI.Init(inventory);
-        currentNPC = npcList[Random.Range(0,npcList.Length)];
+        currentNPC = npcList[npcIndex];
         grid.SetGameState(currentNPC.gameState);
         character.sprite = CharacterManager.GetSprite(currentNPC.characterName);
         score = 0;

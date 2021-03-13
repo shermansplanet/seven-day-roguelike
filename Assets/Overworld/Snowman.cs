@@ -32,6 +32,12 @@ public class Snowman : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        footPosition = renderers[2].transform.position;
+        nextFootPosition = footPosition;
+    }
+
     public void Update()
     {
         Vector3 velocity = (transform.position - lastPosition) / Time.deltaTime;
@@ -64,5 +70,13 @@ public class Snowman : MonoBehaviour
 
         renderers[1].transform.position = Vector3.Lerp(renderers[0].transform.position, renderers[2].transform.position, 0.5f);
         renderers[1].transform.rotation = Quaternion.LookRotation(Vector3.forward, renderers[0].transform.position - renderers[2].transform.position);
+    }
+
+    public void SetSortingOrder(int order)
+    {
+        foreach(SpriteRenderer r in renderers)
+        {
+            r.sortingOrder = order;
+        }
     }
 }
