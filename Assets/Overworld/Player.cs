@@ -10,10 +10,23 @@ public class Player : MonoBehaviour
     public CircleCollider2D playerCollider;
     public ContactFilter2D contactFilter;
 
+    public static Color[] colors;
+    public static bool firstSpawn = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        snowman.SetRandomColors();
+        if (firstSpawn)
+        {
+            colors = new Color[]
+            {
+                new Color(Random.value, Random.value, Random.value),
+                new Color(Random.value, Random.value, Random.value),
+                new Color(Random.value, Random.value, Random.value)
+            };
+            firstSpawn = false;
+        }
+        snowman.SetColors(colors);
     }
 
     // Update is called once per frame

@@ -13,6 +13,8 @@ public class OverworldNpc : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, player.position) < 1)
         {
+            LevelGenerator.npcPositions.Remove(characterName);
+            LevelGenerator.playerPos = player.transform.position;
             GameManager.npcIndex = (int)characterName;
             SceneManager.LoadScene(1);
         }

@@ -14,16 +14,6 @@ public class Snowman : MonoBehaviour
 
     private const float gaitSpeed = 4f;
 
-    public void SetRandomColors()
-    {
-        SetColors(new Color[]
-        {
-            new Color(Random.value, Random.value, Random.value),
-            new Color(Random.value, Random.value, Random.value),
-            new Color(Random.value, Random.value, Random.value)
-        });
-    }
-
     public void SetColors(Color[] colors)
     {
         for(int i=0; i<colors.Length; i++)
