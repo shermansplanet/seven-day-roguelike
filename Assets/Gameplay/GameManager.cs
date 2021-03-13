@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private const int ScoreToWin = 20;
+    private const int ScoreToWin = 30;
 
     public InventoryUI inventoryUI;
     public ConversationGrid grid;
@@ -27,11 +27,8 @@ public class GameManager : MonoBehaviour
         {
             inventory = new Inventory();
             inventory.PopulateRandomInventory();
-            npcList = new NPC[3];
-            //for (int i = 0; i < npcList.Length; i++) npcList[i] = new NPC(CharacterManager.Name.STRAWBUB);
-            npcList[0] = new NPC(CharacterManager.Name.STRAWBUB);
-            npcList[1] = new NPC(CharacterManager.Name.LAVENDER);
-            npcList[2] = new NPC(CharacterManager.Name.NONE);
+            npcList = new NPC[CharacterManager.validNpcNames.Count];
+            for (int i = 0; i < npcList.Length; i++) npcList[i] = new NPC(CharacterManager.validNpcNames[i]);
         }
         inventoryUI.Init(inventory);
         currentNPC = npcList[npcIndex];

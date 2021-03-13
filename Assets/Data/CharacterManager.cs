@@ -9,8 +9,12 @@ public class CharacterManager : MonoBehaviour
     public enum Name {
         STRAWBUB,
         LAVENDER,
+        BLUEBUB,
+        LOREN,
         NONE,
     }
+
+    public static List<Name> validNpcNames = new List<Name> { Name.STRAWBUB, Name.LAVENDER, Name.BLUEBUB, Name.LOREN, Name.NONE };
 
     [Serializable]
     public struct CharacterSprite {
@@ -34,6 +38,12 @@ public class CharacterManager : MonoBehaviour
         }
         if (name == Name.LAVENDER) {
             return new List<CardId> { CardId.FUNFACT, CardId.ANECDOTE, CardId.FOLLOWUP, CardId.TEST, CardId.WOW, CardId.COOL };
+        }
+        if (name == Name.BLUEBUB) {
+            return new List<CardId> { CardId.EXAMPLE, CardId.WHY, CardId.HOW, CardId.SAME, CardId.NO, CardId.COOL, CardId.SILENCE };
+        }
+        if (name == Name.LOREN) {
+            return new List<CardId> { CardId.FUNFACT, CardId.SLEEPY };
         }
         else {
             return null;
