@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private const int PathSeparation= 5;
+    private const int PathSeparation= 3;
     private const int EncounterLength = 5;
     private const int GridSize = 3;
 
     public SpriteRenderer tilePrefab;
+    public SpriteRenderer blockerPrefab;
     public OverworldNpc npcPrefab;
     public CharacterColors colors;
     public Player player;
 
     private HashSet<Vector2> levelTiles;
+    private HashSet<Vector2> blockerTiles;
 
     public void GenerateLevel()
     {
         string[] charNames = System.Enum.GetNames(typeof(CharacterManager.Name));
+        Debug.Log(charNames.Length);
         int EncounterCount = 2;
         int pathCount = Random.Range(1, 1 + Mathf.FloorToInt(charNames.Length * 1f / EncounterCount));
         List<int>[,] encounters = new List<int>[pathCount, EncounterCount];
@@ -38,6 +41,7 @@ public class LevelGenerator : MonoBehaviour
                 encounters[pathIndex, encounterIndex] = new List<int> { sourceList[i] };
                 sourceList.RemoveAt(i);
             }
+            pathWidths[pathIndex] = 1;
         }
 
         while(sourceList.Count > 0)
@@ -86,13 +90,35 @@ public class LevelGenerator : MonoBehaviour
                     npc.snowman.SetColors(colors.GetColors(n));
                 }
             }
-            pathPosition += pathWidths[pathIndex];
+            if(pathIndex < pathCount - 1) pathPosition += pathWidths[pathIndex];
         }
 
-        foreach(Vector2 pos in levelTiles)
+        for(int y=0; y <= pathPosition * PathSeparation; y++)
+        {
+            Vector2 pos = new Vector2(0, y) * GridSize;
+            if (!levelTiles.Contains(pos)) levelTiles.Add(pos);
+            pos = new Vector2(EncounterLength * EncounterCount, y) * GridSize;
+            if (!levelTiles.Contains(pos)) levelTiles.Add(pos);
+        }
+
+        Vector2[] directions = {
+            Vector2.up, Vector2.down, Vector2.left, Vector2.right
+        };
+
+        blockerTiles = new HashSet<Vector2>();
+
+        foreach (Vector2 pos in levelTiles)
         {
             var tile = Instantiate(tilePrefab, pos, Quaternion.identity);
             tile.transform.localScale = Vector3.one * GridSize;
+            foreach(var dir in directions)
+            {
+                Vector2 blockerPos = dir + pos;
+                if (blockerTiles.Contains(blockerPos) || levelTiles.Contains(blockerPos)) continue;
+                blockerTiles.Add(blockerPos);
+                var blocker = Instantiate(blockerPrefab, blockerPos, Quaternion.identity);
+                blocker.transform.localScale = Vector3.one * GridSize;
+            }
         }
     }
 }

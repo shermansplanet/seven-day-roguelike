@@ -10,7 +10,6 @@ public class OverworldManager : MonoBehaviour
 
     public void Start()
     {
-        string[] charName = Enum.GetNames(typeof(CharacterManager.Name));
         levelGen.GenerateLevel();
     }
 }
