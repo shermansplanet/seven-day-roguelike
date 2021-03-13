@@ -61,6 +61,7 @@ public class ConversationGrid : MonoBehaviour
             newInstance.rotation = card.rotation;
             newInstance.transform.localPosition = new Vector3(card.x, card.y, 0);
             newInstance.transform.Rotate(0, 0, -90 * card.rotation);
+            newInstance.confirmedOnBoard = true;
             cards.Add(newInstance);
         }
         if (cards.Count > 0) UpdateAvailableSpots();

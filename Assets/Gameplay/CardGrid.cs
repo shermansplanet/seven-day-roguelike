@@ -22,7 +22,9 @@ public class CardGrid : MonoBehaviour {
 
     [HideInInspector]
     public bool beingDragged;
-    bool confirmedOnBoard = false;
+
+    [HideInInspector]
+    public bool confirmedOnBoard = false;
 
     public void Init(ConversationGrid grid, Card card, CardInventory parent) {
         cardInstance.Init(card, parent == null);
