@@ -45,14 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428376eb883734e3aa0f3560cf12d6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lavenderColors:
-  - {r: 0.7941704, g: 0.55108577, b: 0.9056604, a: 1}
-  - {r: 0.8679245, g: 0.8255736, b: 0.65913135, a: 1}
-  - {r: 0.30019575, g: 0.5471698, b: 0.26067996, a: 1}
   strawbubColors:
   - {r: 0.8679245, g: 0.27419823, b: 0.21698113, a: 1}
   - {r: 0.7924528, g: 0.6212397, b: 0.43734425, a: 1}
   - {r: 0.44026563, g: 0.6603774, b: 0.40183342, a: 1}
+  lavenderColors:
+  - {r: 0.7941704, g: 0.55108577, b: 0.9056604, a: 1}
+  - {r: 0.8679245, g: 0.8255736, b: 0.65913135, a: 1}
+  - {r: 0.30019575, g: 0.5471698, b: 0.26067996, a: 1}
+  bluebubColors: []
+  lorenColors: []
   noneColors:
   - {r: 0.40784317, g: 0.30588236, b: 0.21176472, a: 1}
   - {r: 0.48235297, g: 0.46274513, b: 0.8196079, a: 1}
@@ -82,7 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df747b5c3ff614d74960b6dc2b25c52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 8958631938818352297, guid: 05fa59d98974a45be92d3e1760deb651,
+  tilePrefab: {fileID: 5926417363694885503, guid: 5853c502ab7f44071ba36bdbb751803c,
+    type: 3}
+  blockerPrefab: {fileID: 5087739425274198825, guid: 96ee9a14df9bf40e18c4d27e0de9d3f9,
     type: 3}
   npcPrefab: {fileID: 6394444576298366027, guid: d931ac86fec124351b735b8baa29d802,
     type: 3}

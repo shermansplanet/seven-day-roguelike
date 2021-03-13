@@ -20,7 +20,6 @@ public class LevelGenerator : MonoBehaviour
     public void GenerateLevel()
     {
         string[] charNames = System.Enum.GetNames(typeof(CharacterManager.Name));
-        Debug.Log(charNames.Length);
         int EncounterCount = 2;
         int pathCount = Random.Range(1, 1 + Mathf.FloorToInt(charNames.Length * 1f / EncounterCount));
         List<int>[,] encounters = new List<int>[pathCount, EncounterCount];
@@ -113,7 +112,7 @@ public class LevelGenerator : MonoBehaviour
             tile.transform.localScale = Vector3.one * GridSize;
             foreach(var dir in directions)
             {
-                Vector2 blockerPos = dir + pos;
+                Vector2 blockerPos = dir * GridSize + pos;
                 if (blockerTiles.Contains(blockerPos) || levelTiles.Contains(blockerPos)) continue;
                 blockerTiles.Add(blockerPos);
                 var blocker = Instantiate(blockerPrefab, blockerPos, Quaternion.identity);
