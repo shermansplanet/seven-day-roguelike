@@ -7,16 +7,18 @@ public class LevelGenerator : MonoBehaviour
     private const int PathSeparation= 3;
     private const int EncounterLength = 5;
     private const float GridSize = 2.5f;
+    private const int EncounterCount = 2;
 
     public SpriteRenderer tilePrefab;
     public SpriteRenderer blockerPrefab;
     public OverworldNpc npcPrefab;
     public CharacterColors colors;
     public Player player;
+    public Transform nextLevel;
 
     private static HashSet<Vector2> levelTiles;
     public static Dictionary<CharacterManager.Name, Vector2> npcPositions;
-    private static bool firstLoad = true;
+    public static bool firstLoad = true;
     public static Vector2 playerPos;
 
     public void GenerateLevel()
@@ -31,7 +33,6 @@ public class LevelGenerator : MonoBehaviour
 
     private void NewLevel() {
         string[] charNames = System.Enum.GetNames(typeof(CharacterManager.Name));
-        int EncounterCount = 2;
         int pathCount = Random.Range(1, 1 + Mathf.FloorToInt(charNames.Length * 1f / EncounterCount));
         List<int>[,] encounters = new List<int>[pathCount, EncounterCount];
 
@@ -143,5 +144,6 @@ public class LevelGenerator : MonoBehaviour
         }
 
         player.transform.position = playerPos;
+        nextLevel.transform.position = new Vector2(EncounterLength * EncounterCount * GridSize, 0);
     }
 }
