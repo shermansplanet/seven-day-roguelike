@@ -7,6 +7,7 @@ public class NPC
 {
     public Inventory inventory;
     public ConversationGrid.GameState gameState;
+    public CharacterManager.Name characterName;
 
     private struct Move
     {
@@ -15,10 +16,12 @@ public class NPC
         public int rotation;
     }
 
-    public NPC()
+    public NPC(CharacterManager.Name name = CharacterManager.Name.NONE)
     {
+        characterName = name;
         inventory = new Inventory();
-        inventory.PopulateInventory();
+        if (name == CharacterManager.Name.NONE) inventory.PopulateRandomInventory();
+        else inventory.PopulatePresetInventory(CharacterManager.GetCharacterCardPreset(name));
         gameState = new ConversationGrid.GameState
         {
             cards = new List<CardGrid>()

@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
-public class Inventory
-{
+public class Inventory {
     const int INVENTORY_SIZE = 12;
     const int HAND_SIZE = 4;
     public Card[] inventory;
     //inventory but without cards on cooldown
     public List<Card> playableDeck;
 
-    public void PopulateInventory()
-    {
+    public void PopulateRandomInventory() {
         inventory = new Card[INVENTORY_SIZE];
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             Card newCard = new Card();
             newCard.Init(CardManager.GetRandomCardId());
+            inventory[i] = newCard;
+        }
+        playableDeck = new List<Card>(inventory);
+    }
+
+    public void PopulatePresetInventory(List<CardManager.CardId> preset) {
+        inventory = new Card[INVENTORY_SIZE];
+        for (int i = 0; i < INVENTORY_SIZE; i++) {
+            Card newCard = new Card();
+            newCard.Init(preset[UnityEngine.Random.Range(0, preset.Count)]);
             inventory[i] = newCard;
         }
         playableDeck = new List<Card>(inventory);
