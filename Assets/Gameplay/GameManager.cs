@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ConfirmLoop());
     }
 
+    public void Restart()
+    {
+        OverworldManager.Restart();
+    }
+
     public void OnCardPlaced()
     {
         grid.ConfirmMove();

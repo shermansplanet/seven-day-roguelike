@@ -30,10 +30,16 @@ public class OverworldManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void Restart()
+    public void OnRestartClicked()
+    {
+        Restart();
+    }
+
+    public static void Restart()
     {
         LevelGenerator.firstLoad = true;
         GameManager.inventory = null;
+        Player.firstSpawn = true;
         level = 0;
         SceneManager.LoadScene(0);
     }
