@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16223ddb093a488181cb785f2ae287d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 7613469881128520848, guid: 13d2451b987bd455e9fc75ce524ca3e6,
-    type: 3}
-  grid: {fileID: 803816715350079554, guid: cd5efa040d8994ca09dce9cf8d724a8f, type: 3}
+  goalText: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  grid: {fileID: 0}
+  character: {fileID: 0}

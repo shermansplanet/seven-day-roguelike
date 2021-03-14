@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private const int ScoreToWin = 30;
-
+    public Text goalText;
     public InventoryUI inventoryUI;
     public ConversationGrid grid;
     public static bool playerTurn = true;
@@ -17,13 +16,9 @@ public class GameManager : MonoBehaviour
 
     private NPC currentNPC;
 
+    private int goal = 30;
     private static NPC[] npcList;
     private static Inventory inventory;
-
-    public static void RefreshAllCooldowns() {
-        inventory.RefreshAllCooldowns();
-        foreach (NPC npc in npcList) npc.inventory.RefreshAllCooldowns();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +35,7 @@ public class GameManager : MonoBehaviour
         grid.SetGameState(currentNPC);
         character.sprite = CharacterManager.GetSprite(currentNPC.characterName);
         score = 0;
+        goalText.text = "Goal: " + goal.ToString();
     }
 
     public void OnConfirm()
@@ -55,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             grid.cards.Clear();
         }
-        if (score >= ScoreToWin || fullBoard)
+        if (score >= goal || fullBoard)
         {
             StopAllCoroutines();
             StartCoroutine(WinLoop(!fullBoard));
@@ -95,4 +91,13 @@ public class GameManager : MonoBehaviour
         inventoryUI.DrawHand();
     }
 
+    public void IncreaseGoal() {
+        goal += 5;
+        goalText.text = "Goal: " + goal.ToString();
+    }
+
+    public static void RefreshAllCooldowns() {
+        inventory.RefreshAllCooldowns();
+        foreach (NPC npc in npcList) npc.inventory.RefreshAllCooldowns();
+    }
 }
