@@ -50,4 +50,9 @@ public class Card
         ChildBeingDragged = false;
         IsOnCooldown = false;
     }
+
+    public Card Clone()
+    {
+        return new Card { cardData = cardData };
+    }
 }
