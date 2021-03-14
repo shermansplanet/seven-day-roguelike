@@ -24,4 +24,17 @@ public class OverworldManager : MonoBehaviour
         GameManager.RefreshAllCooldowns();
         SceneManager.LoadScene(0);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Restart()
+    {
+        LevelGenerator.firstLoad = true;
+        GameManager.inventory = null;
+        level = 0;
+        SceneManager.LoadScene(0);
+    }
 }

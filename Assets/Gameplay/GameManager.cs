@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     private int goal;
     private static NPC[] npcList;
-    private static Inventory inventory;
+    public static Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
