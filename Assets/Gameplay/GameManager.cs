@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private NPC currentNPC;
 
-    private int goal = 30;
+    private int goal;
     private static NPC[] npcList;
     private static Inventory inventory;
 
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         grid.SetGameState(currentNPC);
         character.sprite = CharacterManager.GetSprite(currentNPC.characterName);
         score = 0;
+        goal = 30 + 5 * OverworldManager.level;
         goalText.text = "Goal: " + goal.ToString();
     }
 

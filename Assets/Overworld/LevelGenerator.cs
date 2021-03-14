@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
     private const int PathSeparation= 3;
     private const int EncounterLength = 5;
     private const float GridSize = 2.5f;
-    private const int EncounterCount = 2;
+    private const int EncounterCount = 3;
 
     public SpriteRenderer tilePrefab;
     public SpriteRenderer blockerPrefab;
