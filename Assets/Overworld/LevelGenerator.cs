@@ -33,7 +33,10 @@ public class LevelGenerator : MonoBehaviour
 
     private void NewLevel() {
         string[] charNames = System.Enum.GetNames(typeof(CharacterManager.Name));
-        int pathCount = Random.Range(1, 1 + Mathf.FloorToInt(charNames.Length * 1f / EncounterCount));
+
+        int characterCount = Random.Range(EncounterCount, charNames.Length + 1);
+
+        int pathCount = Random.Range(1, 1 + Mathf.FloorToInt(characterCount * 1f / EncounterCount));
         List<int>[,] encounters = new List<int>[pathCount, EncounterCount];
 
         List<int> sourceList = new List<int>();
@@ -55,7 +58,7 @@ public class LevelGenerator : MonoBehaviour
             pathWidths[pathIndex] = 1;
         }
 
-        while (sourceList.Count > 0)
+        while (sourceList.Count > charNames.Length - characterCount)
         {
             int pathIndex = Random.Range(0, pathCount);
             int encounterIndex = Random.Range(0, EncounterCount);
