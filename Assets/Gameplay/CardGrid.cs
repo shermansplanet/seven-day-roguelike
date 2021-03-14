@@ -7,6 +7,7 @@ using UnityEngine;
 public class CardGrid : MonoBehaviour {
     private ConversationGrid grid;
     public CardInstance cardInstance;
+    public BoxCollider2D clickCollider;
     public Card card;
     public bool firstDrag;
     private CardInventory parent;
@@ -26,10 +27,16 @@ public class CardGrid : MonoBehaviour {
     [HideInInspector]
     public bool confirmedOnBoard = false;
 
-    public void Init(ConversationGrid grid, Card card, CardInventory parent) {
+    public enum CardSource {SAVED, PLAYER, OTHER};
+
+    [HideInInspector]
+    public CardSource source;
+
+    public void Init(ConversationGrid grid, Card card, CardInventory parent, CardSource source) {
         cardInstance.Init(card, parent == null);
         this.parent = parent;
         this.grid = grid;
+        this.source = source;
         gridPixelPosition = Camera.main.WorldToScreenPoint(grid.transform.position);
         this.card = card;
         gridSquarePixels = Screen.height / grid.GridSquaresVertical;
@@ -56,6 +63,10 @@ public class CardGrid : MonoBehaviour {
     }
 
     private void OnMouseDown() {
+        if(grid.winStage > 0)
+        {
+            grid.activeCard = this;
+        }
         if (!Draggable()) return;
         ResetCenterText();
         beingDragged = true;
@@ -99,5 +110,11 @@ public class CardGrid : MonoBehaviour {
     public void CancelMoveFromInventory() {
         if (parent) parent.ChildMoveCancelled();
         Destroy(gameObject);
+    }
+
+    public void SetClickable(bool clickable)
+    {
+        clickCollider.enabled = clickable;
+        cardInstance.SetOpacity(clickable ? 1 : 0.3f);
     }
 }

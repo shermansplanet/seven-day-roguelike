@@ -16,6 +16,7 @@ public class ConversationGrid : MonoBehaviour
     public int BoardWidth = 6;
     public Transform gridSquarePrefab;
     public GameObject outlinePrefab;
+    public int winStage = 0;
 
     [HideInInspector]
     public float gridScale;
@@ -55,7 +56,7 @@ public class ConversationGrid : MonoBehaviour
         foreach(CardGrid card in state.cards)
         {
             CardGrid newInstance = Instantiate(cardGridPrefab);
-            newInstance.Init(this, card.card, null);
+            newInstance.Init(this, card.card, null, CardGrid.CardSource.SAVED);
             newInstance.x = card.x;
             newInstance.y = card.y;
             newInstance.rotation = card.rotation;
@@ -93,7 +94,7 @@ public class ConversationGrid : MonoBehaviour
     {
         CardGrid cardGrid = Instantiate(cardGridPrefab);
         if(parent) parent.draggedCard = cardGrid;
-        cardGrid.Init(this, c, parent);
+        cardGrid.Init(this, c, parent, parent == null ? CardGrid.CardSource.OTHER : CardGrid.CardSource.PLAYER);
         if(activeCard != null)
         {
             activeCard.CancelMoveFromInventory();
@@ -272,5 +273,18 @@ public class ConversationGrid : MonoBehaviour
             }
         }
         return score;
+    }
+
+    public void SetWinStage(int stage)
+    {
+        activeCard = null;
+        foreach(var card in cards)
+        {
+            card.SetClickable(
+                card.source == CardGrid.CardSource.PLAYER && stage == 1
+                || card.source == CardGrid.CardSource.OTHER && stage == 2
+            );
+        }
+        winStage = stage;
     }
 }

@@ -47,7 +47,14 @@ public class Inventory {
         return Mathf.Max(playableDeck.Count - HAND_SIZE, 0);
     }
 
-    private void ReplaceCard(int index, Card newCard) {
-        inventory[index] = newCard;
+    public void ReplaceCard(Card oldCard, Card newCard) {
+        for(int i=0; i<inventory.Length; i++)
+        {
+            if(inventory[i] == oldCard)
+            {
+                inventory[i] = newCard;
+                return;
+            }
+        }
     }
 }

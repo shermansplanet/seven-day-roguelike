@@ -50,4 +50,18 @@ public class CardInstance : MonoBehaviour
     {
         cardRenderer.color = card.GetColor();
     }
+
+    public void SetOpacity(float o)
+    {
+        var c = cardRenderer.color;
+        c.a = o;
+        cardRenderer.color = c;
+        c = baseScore.color;
+        c.a = o;
+        baseScore.color = c;
+        for (int i = 0; i < 4; i++)
+        {
+            edges[i].color = c;
+        }
+    }
 }
