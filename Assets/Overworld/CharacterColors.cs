@@ -8,6 +8,7 @@ public class CharacterColors : MonoBehaviour
     public Color[] lavenderColors;
     public Color[] bluebubColors;
     public Color[] lorenColors;
+    public Color[] guardColors;
     public Color[] noneColors;
 
     public Color[] GetColors(CharacterManager.Name name)
@@ -17,6 +18,7 @@ public class CharacterColors : MonoBehaviour
             name == CharacterManager.Name.LAVENDER ? lavenderColors :
             name == CharacterManager.Name.BLUEBUB ? bluebubColors :
             name == CharacterManager.Name.LOREN ? lorenColors :
+            name == CharacterManager.Name.GUARD ? guardColors :
             noneColors;
     }
 }
