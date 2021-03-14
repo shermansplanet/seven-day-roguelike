@@ -60,6 +60,7 @@ public class Inventory {
         {
             if(inventory[i] == oldCard)
             {
+                Debug.Log("replacing " + oldCard.GetName() + " with " + newCard.GetName());
                 inventory[i] = newCard;
                 return;
             }
