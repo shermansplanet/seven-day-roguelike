@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         }
         inventoryUI.Init(inventory);
         currentNPC = npcList[npcIndex];
-        grid.SetGameState(currentNPC.gameState);
+        grid.SetGameState(currentNPC);
         character.sprite = CharacterManager.GetSprite(currentNPC.characterName);
         score = 0;
     }
@@ -58,23 +58,26 @@ public class GameManager : MonoBehaviour
         if (score >= ScoreToWin || fullBoard)
         {
             StopAllCoroutines();
-            StartCoroutine(WinLoop());
+            StartCoroutine(WinLoop(!fullBoard));
         }
     }
 
-    public IEnumerator WinLoop()
+    public IEnumerator WinLoop(bool canTrade)
     {
         currentNPC.gameState = grid.GetGameState();
 
-        inventoryUI.SetInstructionText("Choose a card to remove from your deck.");
-        grid.SetWinStage(1);
-        yield return new WaitUntil(() => grid.activeCard != null);
-        var oldCard = grid.activeCard.card;
+        if (canTrade)
+        {
+            inventoryUI.SetInstructionText("Choose a card to remove from your deck.");
+            grid.SetWinStage(1);
+            yield return new WaitUntil(() => grid.activeCard != null);
+            var oldCard = grid.activeCard.card;
 
-        inventoryUI.SetInstructionText("Choose a card to add to your deck.");
-        grid.SetWinStage(2);
-        yield return new WaitUntil(() => grid.activeCard != null);
-        inventory.ReplaceCard(oldCard, grid.activeCard.card);
+            inventoryUI.SetInstructionText("Choose a card to add to your deck.");
+            grid.SetWinStage(2);
+            yield return new WaitUntil(() => grid.activeCard != null);
+            inventory.ReplaceCard(oldCard, grid.activeCard.card);
+        }
 
         SceneManager.LoadScene(0);
         StopAllCoroutines();

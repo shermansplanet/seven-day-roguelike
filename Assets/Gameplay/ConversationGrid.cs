@@ -12,11 +12,13 @@ public class ConversationGrid : MonoBehaviour
     public Transform highlight;
     public Button confirmButton, rotateButton;
     public Text scoreText;
-    public int BoardHeight = 4;
-    public int BoardWidth = 6;
+    public const int BoardHeight = 4;
+    public const int BoardWidth = 6;
     public Transform gridSquarePrefab;
     public GameObject outlinePrefab;
     public int winStage = 0;
+
+    private HashSet<Vector2> blockedSquares;
 
     [HideInInspector]
     public float gridScale;
@@ -51,8 +53,9 @@ public class ConversationGrid : MonoBehaviour
         };
     }
 
-    public void SetGameState(GameState state)
+    public void SetGameState(NPC npc)
     {
+        GameState state = npc.gameState;
         foreach(CardGrid card in state.cards)
         {
             CardGrid newInstance = Instantiate(cardGridPrefab);
@@ -65,11 +68,11 @@ public class ConversationGrid : MonoBehaviour
             newInstance.confirmedOnBoard = true;
             cards.Add(newInstance);
         }
-        if (cards.Count > 0) UpdateAvailableSpots();
-    }
 
-    void Start()
-    {
+        blockedSquares = new HashSet<Vector2>(npc.blockedSpots);
+
+        if (cards.Count > 0) UpdateAvailableSpots();
+    
         gridScale = Camera.main.orthographicSize * 2 / GridSquaresVertical;
         transform.localScale = Vector3.one * gridScale;
         transform.position = new Vector3(
@@ -81,6 +84,7 @@ public class ConversationGrid : MonoBehaviour
         {
             for (int y = 0; y < BoardHeight; y++)
             {
+                if (blockedSquares.Contains(new Vector2(x, y))) continue;
                 Transform gridSquare = Instantiate(gridSquarePrefab);
                 gridSquare.SetParent(transform);
                 gridSquare.localScale = Vector3.one;
@@ -165,6 +169,7 @@ public class ConversationGrid : MonoBehaviour
                 if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) continue;
                 if (GetCard(x, y) != null) continue;
                 Vector2 spot = new Vector2(x, y);
+                if (blockedSquares.Contains(spot)) continue;
                 if (availableSpots.Contains(spot)) continue;
                 availableSpots.Add(spot);
             }
