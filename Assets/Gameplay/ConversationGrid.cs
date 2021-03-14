@@ -218,7 +218,7 @@ public class ConversationGrid : MonoBehaviour
         Vector2 direction = directions[edgeIndex];
         int x = Mathf.RoundToInt(direction.x + activeCard.x);
         int y = Mathf.RoundToInt(direction.y + activeCard.y);
-        if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) return true;
+        if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight || blockedSquares.Contains(new Vector2(x,y))) return true;
         else return false;
     }
 
