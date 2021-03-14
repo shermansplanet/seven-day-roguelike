@@ -30,8 +30,16 @@ public class Inventory {
         playableDeck = new List<Card>(inventory);
     }
 
+    public void RefreshAllCooldowns() {
+        Debug.Log(playableDeck.Count);
+        foreach (Card card in inventory) card.OffCooldown();
+        UpdatePlayableDeck();
+        Debug.Log("Refreshing cooldowns");
+        Debug.Log(playableDeck.Count);
+    }
+
     public void UpdatePlayableDeck() {
-        playableDeck = playableDeck.FindAll(card => !card.IsOnCooldown);
+        playableDeck = new List<Card>(Array.FindAll(inventory, card => !card.IsOnCooldown));
     }
 
     public Card[] GetHand() {

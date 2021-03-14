@@ -18,6 +18,7 @@ public class OverworldManager : MonoBehaviour
     {
         LevelGenerator.firstLoad = true;
         level++;
+        GameManager.RefreshAllCooldowns();
         SceneManager.LoadScene(0);
     }
 }

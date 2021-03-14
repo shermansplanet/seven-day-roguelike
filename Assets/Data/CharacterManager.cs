@@ -34,16 +34,16 @@ public class CharacterManager : MonoBehaviour
 
     public static List<CardId> GetCharacterCardPreset(Name name) {
         if (name == Name.STRAWBUB) {
-            return new List<CardId>{ CardId.WHY, CardId.SAME, CardId.NO, CardId.SHUSH, CardId.SILENCE, CardId.SLEEPY };
+            return new List<CardId>{ CardId.WHY, CardId.NO, CardId.SHUSH, CardId.SILENCE, CardId.SLEEPY };
         }
         if (name == Name.LAVENDER) {
-            return new List<CardId> { CardId.FUNFACT, CardId.ANECDOTE, CardId.FOLLOWUP, CardId.TEST, CardId.WOW, CardId.COOL };
+            return new List<CardId> { CardId.FUNFACT, CardId.ANECDOTE, CardId.FOLLOWUP, CardId.WOW, CardId.COOL };
         }
         if (name == Name.BLUEBUB) {
-            return new List<CardId> { CardId.EXAMPLE, CardId.WHY, CardId.HOW, CardId.SAME, CardId.NO, CardId.COOL, CardId.SILENCE };
+            return new List<CardId> { CardId.EXAMPLE, CardId.WHY, CardId.HOW, CardId.SAME, CardId.COOL };
         }
         if (name == Name.LOREN) {
-            return new List<CardId> { CardId.FUNFACT, CardId.SLEEPY };
+            return new List<CardId> { CardId.FUNFACT, CardId.SILENCE, CardId.SLEEPY };
         }
         else {
             return null;

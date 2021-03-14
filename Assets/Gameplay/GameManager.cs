@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     private static NPC[] npcList;
     private static Inventory inventory;
 
+    public static void RefreshAllCooldowns() {
+        inventory.RefreshAllCooldowns();
+        foreach (NPC npc in npcList) npc.inventory.RefreshAllCooldowns();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
