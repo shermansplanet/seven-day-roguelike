@@ -744,6 +744,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: lorenColors.Array.data[1].b
+      value: 0.17986828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: lorenColors.Array.data[1].g
+      value: 0.59759617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: lorenColors.Array.data[1].r
+      value: 0.8867924
+      objectReference: {fileID: 0}
     - target: {fileID: 1584626816519678853, guid: 315580876868d43fcba7a56ff6cf9272,
         type: 3}
       propertyPath: player
