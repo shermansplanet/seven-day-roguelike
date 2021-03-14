@@ -568,6 +568,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[0].b
+      value: 0.44705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[0].g
+      value: 0.44705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[0].r
+      value: 0.44705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[1].b
+      value: 0.79607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[1].g
+      value: 0.85882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[1].r
+      value: 0.9372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[2].b
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[2].g
+      value: 0.16078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419890275, guid: 315580876868d43fcba7a56ff6cf9272, type: 3}
+      propertyPath: guardColors.Array.data[2].r
+      value: 0.45882353
+      objectReference: {fileID: 0}
     - target: {fileID: 1584626816519678853, guid: 315580876868d43fcba7a56ff6cf9272,
         type: 3}
       propertyPath: player

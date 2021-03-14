@@ -11,10 +11,18 @@ public class CharacterManager : MonoBehaviour
         LAVENDER,
         BLUEBUB,
         LOREN,
+        GUARD,
         NONE,
     }
 
-    public static List<Name> validNpcNames = new List<Name> { Name.STRAWBUB, Name.LAVENDER, Name.BLUEBUB, Name.LOREN, Name.NONE };
+    public static List<Name> validNpcNames = new List<Name> {
+        Name.STRAWBUB,
+        Name.LAVENDER,
+        Name.BLUEBUB,
+        Name.LOREN,
+        Name.GUARD,
+        Name.NONE
+    };
 
     [Serializable]
     public struct CharacterSprite {
@@ -44,6 +52,9 @@ public class CharacterManager : MonoBehaviour
         }
         if (name == Name.LOREN) {
             return new List<CardId> { CardId.FUNFACT, CardId.SILENCE, CardId.SLEEPY };
+        }
+        if (name == Name.GUARD) {
+            return new List<CardId> { CardId.NO, CardId.TEST, CardId.WHY };
         }
         else {
             return null;

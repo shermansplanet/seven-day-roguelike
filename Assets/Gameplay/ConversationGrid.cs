@@ -214,13 +214,21 @@ public class ConversationGrid : MonoBehaviour
         return null;
     }
 
+    public bool IsNextToEdge(int edgeIndex) {
+        Vector2 direction = directions[edgeIndex];
+        int x = Mathf.RoundToInt(direction.x + activeCard.x);
+        int y = Mathf.RoundToInt(direction.y + activeCard.y);
+        if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) return true;
+        else return false;
+    }
+
     public CardGrid GetAdjacentCard(int edgeIndex) {
         Vector2 direction = directions[edgeIndex];
         int x = Mathf.RoundToInt(direction.x + activeCard.x);
         int y = Mathf.RoundToInt(direction.y + activeCard.y);
         if (x < 0 || y < 0 || x >= BoardWidth || y >= BoardHeight) return null;
-            return GetCard(x, y);
-        }
+        return GetCard(x, y);
+    }
 
     private void SetEdgeColorBonus(int edgeIndex) {
         CardGrid otherCard = GetAdjacentCard(edgeIndex);
@@ -250,8 +258,9 @@ public class ConversationGrid : MonoBehaviour
         {
             CardManager.CardEdge edge = activeCard.card.cardData.edges[(i + 4 - activeCard.rotation) % 4];
             CardGrid otherCard = GetAdjacentCard(i);
-            if (otherCard == null) continue;
-            CardManager.CardEdge otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
+            if (!IsNextToEdge(i) && otherCard == null) continue;
+            CardManager.CardEdge otherEdge = CardManager.CardEdge.NONE;
+            if (otherCard != null) otherEdge = otherCard.card.cardData.edges[(i + 6 - otherCard.rotation) % 4];
             if(edge == otherEdge && edge != CardManager.CardEdge.NONE){
                 if (edge == CardManager.CardEdge.QUESTION) {
                     score += -2;
