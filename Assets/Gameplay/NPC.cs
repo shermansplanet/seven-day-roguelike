@@ -41,6 +41,7 @@ public class NPC
 
     private void GetBlockedSpots()
     {
+        blockedSpots.Clear();
         while(blockedSpots.Count < BlockedSpotCount)
         {
             blockedSpots.Add(new Vector2(

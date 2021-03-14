@@ -63,7 +63,7 @@ MonoBehaviour:
   - {r: 0.44705883, g: 0.5058824, b: 0.26666668, a: 1}
   guardColors:
   - {r: 0.44705883, g: 0.44705883, b: 0.44705883, a: 1}
-  - {r: 0.9372549, g: 0.81960785, b: 0.8352941, a: 1}
+  - {r: 0.9372549, g: 0.85882354, b: 0.79607844, a: 1}
   - {r: 0.45882353, g: 0.16078432, b: 0.1254902, a: 1}
   noneColors:
   - {r: 0.4117647, g: 0.30588236, b: 0.20784314, a: 1}
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelGen: {fileID: 1584626816519678853}
+  levelText: {fileID: 0}
 --- !u!114 &1584626816519678853
 MonoBehaviour:
   m_ObjectHideFlags: 0
