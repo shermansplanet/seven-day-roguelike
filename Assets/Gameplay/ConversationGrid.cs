@@ -266,7 +266,7 @@ public class ConversationGrid : MonoBehaviour
                     score += -2;
                     if (updateColors) SetEdgeColorPenalty(i);
                 }
-                else {
+                else if (edge != CardManager.CardEdge.ENERGY_HIGH && edge != CardManager.CardEdge.ENERGY_LOW) {
                     score += 2;
                     if (updateColors) SetEdgeColorBonus(i);
                 }
