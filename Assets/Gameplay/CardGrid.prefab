@@ -46,11 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardInstance: {fileID: 8050707619932420739}
+  clickCollider: {fileID: 2827427574906732863}
   firstDrag: 0
   x: 0
   y: 0
   rotation: 0
   beingDragged: 0
+  confirmedOnBoard: 0
+  source: 0
 --- !u!61 &2827427574906732863
 BoxCollider2D:
   m_ObjectHideFlags: 0

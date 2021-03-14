@@ -57,10 +57,27 @@ public class GameManager : MonoBehaviour
         }
         if (score >= ScoreToWin || fullBoard)
         {
-            currentNPC.gameState = grid.GetGameState();
-            SceneManager.LoadScene(0);
             StopAllCoroutines();
+            StartCoroutine(WinLoop());
         }
+    }
+
+    public IEnumerator WinLoop()
+    {
+        currentNPC.gameState = grid.GetGameState();
+
+        inventoryUI.SetInstructionText("Choose a card to remove from your deck.");
+        grid.SetWinStage(1);
+        yield return new WaitUntil(() => grid.activeCard != null);
+        var oldCard = grid.activeCard.card;
+
+        inventoryUI.SetInstructionText("Choose a card to add to your deck.");
+        grid.SetWinStage(2);
+        yield return new WaitUntil(() => grid.activeCard != null);
+        inventory.ReplaceCard(oldCard, grid.activeCard.card);
+
+        SceneManager.LoadScene(0);
+        StopAllCoroutines();
     }
 
     public IEnumerator ConfirmLoop()
@@ -70,6 +87,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         yield return currentNPC.TakeTurn(grid);
         OnCardPlaced();
+        if (grid.winStage > 0) yield break;
         playerTurn = true;
         inventoryUI.DrawHand();
     }

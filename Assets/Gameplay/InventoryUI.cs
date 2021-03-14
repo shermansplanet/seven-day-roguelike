@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
     public CardInventory cardInventoryPrefab;
     public TextMeshPro cooldownCount;
     public TextMeshPro deckCount;
+    public TextMeshPro instructions;
 
     [HideInInspector]
     public ConversationGrid grid;
@@ -19,6 +20,7 @@ public class InventoryUI : MonoBehaviour
     {
         this.inventory = inventory;
         DrawHand();
+        instructions.gameObject.SetActive(false);
     }
 
     public void DrawHand() {
@@ -35,5 +37,15 @@ public class InventoryUI : MonoBehaviour
         }
         cooldownCount.text = inventory.GetCooldownCount().ToString();
         deckCount.text = inventory.GetDeckCount().ToString();
+    }
+
+    public void SetInstructionText(string text)
+    {
+        instructions.gameObject.SetActive(true);
+        instructions.text = text;
+        foreach(CardInventory c in inventoryHandCards)
+        {
+            c.gameObject.SetActive(false);
+        }
     }
 }
